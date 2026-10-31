@@ -83,12 +83,24 @@ tokens) once alongside the data. It pays off as soon as the data is a few
 hundred tokens long. Convert data **before** it reaches the model, in your
 tool or API layer; asking the model to convert saves nothing.
 
+### MCP servers
+
+[`@lwon/mcp-proxy`](packages/mcp-proxy) does this for any stdio MCP server
+without changing it: put `npx -y @lwon/mcp-proxy --` in front of the server's
+command, and large JSON tool results reach the model as LWON, with the primer
+sent once in the server's instructions.
+
+```bash
+claude mcp add github -- npx -y @lwon/mcp-proxy -- npx -y @modelcontextprotocol/server-github
+```
+
 ## Repository
 
 | Path | Contents |
 |---|---|
 | [SPEC.md](SPEC.md) | The LWON 1.0 specification |
 | [packages/lwon](packages/lwon) | Reference TypeScript library and CLI, no dependencies |
+| [packages/mcp-proxy](packages/mcp-proxy) | MCP proxy that converts any server's JSON tool results to LWON |
 | [conformance](conformance) | Language-neutral test cases for any implementation |
 | [ai](ai) | Primer text for language models |
 | [bench](bench) | Token benchmark against JSON and TOON |
@@ -109,8 +121,7 @@ npm run eval:report -- --suite sparse
 ## Status
 
 1.0 beta. The format is stable enough to try; it may still change before 1.0.
-Planned: an MCP proxy that converts any MCP server's tool results to LWON, and
-ports to Python and Go.
+Planned: ports to Python and Go.
 
 ## License
 

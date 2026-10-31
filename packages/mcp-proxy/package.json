@@ -1,0 +1,59 @@
+{
+  "name": "@lwon/mcp-proxy",
+  "version": "0.1.0",
+  "description": "Put in front of any stdio MCP server to turn its large JSON tool results into LWON before they reach the model. Fewer tokens, no changes to the server.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "proxy",
+    "json",
+    "llm",
+    "tokens"
+  ],
+  "author": "Ahmet Zencirli",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmetzencirli/lwon.git",
+    "directory": "packages/mcp-proxy"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "lwon-mcp-proxy": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "pretest": "npm run build --workspace @lwon/core",
+    "test": "node --test test/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "smoke": "node test/dist-smoke.mjs",
+    "prepublishOnly": "npm run build && npm test && npm run smoke"
+  },
+  "homepage": "https://ahmetzencirli.github.io/lwon-studio/",
+  "bugs": {
+    "url": "https://github.com/ahmetzencirli/lwon/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@lwon/core": "^1.0.0-beta.2",
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@modelcontextprotocol/server": "^2.4.0"
+  }
+}
