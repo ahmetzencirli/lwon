@@ -41,8 +41,19 @@ Claude tokens (Haiku, Sonnet and Opus 5.5 share a tokenizer), counted with the
 **Accuracy.** Claude Haiku 5.5, Sonnet 5.5 and Opus 5.5 answered 44 questions
 about this data (lookups, counts, nested fields, trees, absent versus null) in
 each format. At medium effort every model answered every question correctly in
-JSON, TOON and LWON. At low effort Haiku made one counting slip, in LWON. See
-[bench/eval/EVAL.md](bench/eval/EVAL.md).
+JSON, TOON and LWON ([bench/eval/EVAL.md](bench/eval/EVAL.md)). On a harder,
+sparse dataset where most fields are optional, LWON scored like JSON: 94% versus
+92–95% for Haiku and 44/44 versus 43/44 for Sonnet; every miss in every format
+was a count over 150 rows that was off by one or two
+([bench/eval/EVAL-sparse.md](bench/eval/EVAL-sparse.md)).
+
+**The catch: models think longer about LWON.** Mapping values to fields by
+position costs output tokens, which are priced higher than input. On regular
+data, sent once, a question still costs 18–24% less with LWON than with JSON.
+When the same data is cached and reused, the saving disappears. On sparse data,
+counting questions take Sonnet twice and Haiku four times the output tokens, so
+LWON costs more there. Use LWON for large, regular payloads read once; reducing
+this reasoning overhead is the next piece of work.
 
 ## Use it
 
@@ -92,14 +103,17 @@ npm run bench    # regenerate bench/RESULTS.md
 # Comprehension eval against the Claude API (needs ANTHROPIC_API_KEY; about $1.30 for all three models)
 npm run eval:tokens
 npm run eval -- --budget 2
+npm run eval -- --suite sparse --trials 3 --budget 2
 npm run eval:report
+npm run eval:report -- --suite sparse
 ```
 
 ## Status
 
 1.0 beta. The format is stable enough to try; it may still change before 1.0.
-Planned: an MCP proxy that converts any MCP server's tool results to LWON, a
-harder comprehension eval with repeated trials, and ports to Python and Go.
+Planned: cutting the reasoning overhead on sparse data (primer and encoder
+changes, measured with the eval), an MCP proxy that converts any MCP server's
+tool results to LWON, and ports to Python and Go.
 
 ## License
 

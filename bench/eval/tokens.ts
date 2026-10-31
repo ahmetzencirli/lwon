@@ -2,18 +2,20 @@
 // is free). `raw` is the data alone; `prompt` adds the format label or LWON primer
 // exactly as the eval sends it. Writes bench/eval/tokens.json.
 //
-//   node bench/eval/tokens.ts [--models a,b] [--dry]   (--dry uses o200k instead)
-import { readFileSync, writeFileSync } from 'node:fs';
+//   node bench/eval/tokens.ts [--models a,b] [--suite sparse] [--dry]   (--dry uses o200k instead)
+import { writeFileSync } from 'node:fs';
 import Anthropic from '@anthropic-ai/sdk';
 import { encode as o200k } from 'gpt-tokenizer';
 import { encode as toToon } from '@toon-format/toon';
 import { encode as toLwon } from '../../packages/lwon/src/index.ts';
-import { dataBlock, DEFAULT_MODELS, FORMATS, type Format } from './eval.ts';
+import { dataBlock, DEFAULT_MODELS, FORMATS, loadDataset, type Format } from './eval.ts';
 
-const DATASETS = ['users', 'orders', 'issues', 'menu', 'logs', 'search'];
 const a = process.argv.slice(2);
+const val = (k: string) => (a.includes(k) ? a[a.indexOf(k) + 1] : undefined);
 const dry = a.includes('--dry');
-const models = dry ? ['o200k'] : (a[a.indexOf('--models') + 1] && a.includes('--models') ? a[a.indexOf('--models') + 1].split(',') : DEFAULT_MODELS);
+const suite = val('--suite') ?? 'basic';
+const DATASETS = suite === 'basic' ? ['users', 'orders', 'issues', 'menu', 'logs', 'search'] : [suite];
+const models = dry ? ['o200k'] : (val('--models')?.split(',') ?? DEFAULT_MODELS);
 
 const raw = (format: Format, data: unknown) =>
   format === 'json' ? JSON.stringify(data) : format === 'toon' ? toToon(data) : toLwon(data);
@@ -31,7 +33,7 @@ for (const model of models) {
   // A one-character message measures the fixed per-request overhead, which is subtracted.
   const overhead = client ? await count(model, 'x') - 1 : 0;
   for (const name of DATASETS) {
-    const data = JSON.parse(readFileSync(new URL(`../data/${name}.json`, import.meta.url), 'utf8'));
+    const data = loadDataset(name);
     out[model][name] = {} as Record<Format, { raw: number; prompt: number }>;
     for (const f of FORMATS) {
       out[model][name][f] = {
@@ -42,4 +44,5 @@ for (const model of models) {
   }
   console.log(model, JSON.stringify(out[model]));
 }
-writeFileSync(new URL(dry ? 'tokens-dry.json' : 'tokens.json', import.meta.url), JSON.stringify(out, null, 2) + '\n');
+const suffix = `${suite === 'basic' ? '' : `-${suite}`}${dry ? '-dry' : ''}`;
+writeFileSync(new URL(`tokens${suffix}.json`, import.meta.url), JSON.stringify(out, null, 2) + '\n');

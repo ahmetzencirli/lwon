@@ -58,6 +58,24 @@ a value computed from the data. JSON is minified; LWON is sent with its primer; 
 | absent | 4/4 | 4/4 | 4/4 |
 | tree | 4/4 | 4/4 | 4/4 |
 
+## Output tokens and cost per question
+
+Average output tokens (including thinking), and the full cost of one question compared with JSON:
+"sent once" prices the data as normal input, "cached" as a cache read when the same data answers many questions.
+
+| Model | Output JSON | TOON | LWON | TOON sent once | LWON sent once | TOON cached | LWON cached |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| claude-haiku-5-5 | 167 | 169 | 235 | -10% | -18% | -3% | +17% |
+| claude-haiku-5-5 (effort low) | 146 | 158 | 210 | -9% | -19% | 0% | +16% |
+| claude-opus-5-5 | 120 | 81 | 130 | -15% | -24% | -27% | -1% |
+| claude-sonnet-5-5 | 86 | 76 | 108 | -12% | -24% | -12% | -2% |
+
+## Wrong answers
+
+| Model | Format | Question | Expected | Got |
+|---|---|---|---|---|
+| claude-haiku-5-5 (effort low) | lwon | logs-2 | 23 | "22" |
+
 ## Tokens (claude-haiku-5-5, claude-sonnet-5-5, claude-opus-5-5)
 
 Data only, then LWON with its primer as sent in the eval. Changes are against minified JSON.

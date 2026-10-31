@@ -5,6 +5,7 @@
 //   node bench/eval/eval.ts --models claude-haiku-5-5  # real run (needs ANTHROPIC_API_KEY)
 //   node bench/eval/eval.ts --limit 5                  # first 5 questions only
 //   node bench/eval/eval.ts --budget 4                 # stop once this run has spent $4
+//   node bench/eval/eval.ts --suite sparse --trials 3  # the sparse suite, each question 3 times
 //
 // Results append to bench/eval/runs/<model>.jsonl; finished calls are skipped
 // on the next run, so an interrupted run can resume. `node bench/eval/report.ts`
@@ -14,6 +15,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { encode as toToon } from '@toon-format/toon';
 import { encode as toLwon, PRIMER } from '../../packages/lwon/src/index.ts';
 import { buildQuestions, extractAnswer, isCorrect, type Question } from './questions.ts';
+import { buildSparseQuestions, sparseData } from './sparse.ts';
 
 export const FORMATS = ['json', 'toon', 'lwon'] as const;
 export type Format = (typeof FORMATS)[number];
@@ -41,9 +43,19 @@ export function dataBlock(format: Format, data: unknown): string {
   return `${PRIMER}\n\n<data>\n${toLwon(data)}\n</data>`;
 }
 
+export type Suite = 'basic' | 'sparse';
+export const SUITES: Record<Suite, () => Question[]> = { basic: buildQuestions, sparse: buildSparseQuestions };
+
+export function loadDataset(name: string): unknown {
+  if (name === 'sparse') return sparseData();
+  return JSON.parse(readFileSync(new URL(`../data/${name}.json`, import.meta.url), 'utf8'));
+}
+
 export interface Record_ {
   model: string;
   effort?: string;
+  suite?: Suite;
+  trial?: number;
   format: Format;
   id: string;
   dataset: string;
@@ -57,12 +69,13 @@ export interface Record_ {
 }
 
 const dir = new URL('runs/', import.meta.url);
-/** Runs at the default effort keep the plain model name; others get an @effort suffix. */
-const runName = (model: string, effort: string) => (effort === 'medium' ? model : `${model}@${effort}`);
-const runFile = (model: string, effort: string) => new URL(`${runName(model, effort)}.jsonl`, dir);
+/** Basic-suite runs at the default effort keep the plain model name; others get a prefix or suffix. */
+const runName = (model: string, effort: string, suite: Suite) =>
+  `${suite === 'basic' ? '' : `${suite}-`}${model}${effort === 'medium' ? '' : `@${effort}`}`;
+const runFile = (model: string, effort: string, suite: Suite) => new URL(`${runName(model, effort, suite)}.jsonl`, dir);
 
-export function readRuns(model: string, effort = 'medium'): Record_[] {
-  const f = runFile(model, effort);
+export function readRuns(model: string, effort = 'medium', suite: Suite = 'basic'): Record_[] {
+  const f = runFile(model, effort, suite);
   if (!existsSync(f)) return [];
   return readFileSync(f, 'utf8').split('\n').filter(Boolean).map((l) => JSON.parse(l));
 }
@@ -78,6 +91,8 @@ function args() {
     concurrency: Number(val('--concurrency') ?? 4),
     effort: (val('--effort') ?? 'medium') as 'low' | 'medium' | 'high',
     budget: Number(val('--budget') ?? Infinity),
+    suite: (val('--suite') ?? 'basic') as Suite,
+    trials: Number(val('--trials') ?? 1),
   };
 }
 
@@ -90,30 +105,29 @@ async function pool<T>(items: T[], n: number, fn: (t: T) => Promise<void>) {
 
 async function main() {
   const opt = args();
-  const questions = buildQuestions().slice(0, opt.limit);
-  const datasets = Object.fromEntries(
-    [...new Set(questions.map((q) => q.dataset))].map((d) => [
-      d, JSON.parse(readFileSync(new URL(`../data/${d}.json`, import.meta.url), 'utf8')),
-    ]),
-  );
+  const questions = SUITES[opt.suite]().slice(0, opt.limit);
+  const datasets = Object.fromEntries([...new Set(questions.map((q) => q.dataset))].map((d) => [d, loadDataset(d)]));
   mkdirSync(dir, { recursive: true });
   const client = opt.dry ? null : new Anthropic({ maxRetries: 6 });
   if (opt.dry) console.log('Dry run: answering from the ground truth, no API calls.');
   let spent = 0;
 
   for (const model of opt.models) {
-    const out = opt.dry ? new URL(`dry-${model}.jsonl`, dir) : runFile(model, opt.effort);
+    const out = opt.dry ? new URL(`dry-${runName(model, opt.effort, opt.suite)}.jsonl`, dir) : runFile(model, opt.effort, opt.suite);
     const done = new Set(
-      (opt.dry ? [] : readRuns(model, opt.effort)).filter((r) => !r.error).map((r) => `${r.format}/${r.id}`),
+      (opt.dry ? [] : readRuns(model, opt.effort, opt.suite)).filter((r) => !r.error).map((r) => `${r.format}/${r.id}/${r.trial ?? 0}`),
     );
-    const jobs = opt.formats.flatMap((format) => questions.map((q) => ({ format, q })))
-      .filter(({ format, q }) => !done.has(`${format}/${q.id}`));
-    console.log(`${runName(model, opt.effort)}: ${jobs.length} calls to make, ${done.size} already done.`);
+    // Trials interleave formats so a rate limit or budget stop leaves the formats balanced.
+    const jobs = Array.from({ length: opt.trials }, (_, trial) =>
+      questions.flatMap((q) => opt.formats.map((format) => ({ format, q, trial }))))
+      .flat()
+      .filter(({ format, q, trial }) => !done.has(`${format}/${q.id}/${trial}`));
+    console.log(`${runName(model, opt.effort, opt.suite)}: ${jobs.length} calls to make, ${done.size} already done.`);
 
     let n = 0;
-    await pool(jobs, opt.concurrency, async ({ format, q }) => {
+    await pool(jobs, opt.concurrency, async ({ format, q, trial }) => {
       if (spent >= opt.budget) return;
-      const rec = await ask(client, model, format, q, datasets[q.dataset], opt.effort);
+      const rec = { ...(await ask(client, model, format, q, datasets[q.dataset], opt.effort)), suite: opt.suite, trial };
       appendFileSync(out, JSON.stringify(rec) + '\n');
       spent += costOf(rec);
       n++;

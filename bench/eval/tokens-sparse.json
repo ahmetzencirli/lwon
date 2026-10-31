@@ -1,0 +1,18 @@
+{
+  "claude-sonnet-5-5": {
+    "sparse": {
+      "json": {
+        "raw": 10922,
+        "prompt": 10939
+      },
+      "toon": {
+        "raw": 11433,
+        "prompt": 11464
+      },
+      "lwon": {
+        "raw": 7167,
+        "prompt": 7475
+      }
+    }
+  }
+}
