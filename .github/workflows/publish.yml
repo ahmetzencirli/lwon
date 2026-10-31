@@ -35,4 +35,17 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run smoke --workspace lwon
-      - run: npm publish --workspace lwon --provenance --access public
+      # npm needs an explicit tag for prereleases. Until a stable version exists, betas
+      # go out as "latest" so `npm install lwon` gets the newest one; after that, as "beta".
+      - name: Choose the dist-tag
+        id: tag
+        run: |
+          version=$(node -p "require('./packages/lwon/package.json').version")
+          tag=latest
+          if [[ "$version" == *-* ]]; then
+            stable=$(npm view lwon versions --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const v=s?[].concat(JSON.parse(s)):[];console.log(v.some(x=>!x.includes("-"))?"yes":"no")})')
+            [ "$stable" = yes ] && tag=beta
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Publishing $version with tag $tag"
+      - run: npm publish --workspace lwon --provenance --access public --tag ${{ steps.tag.outputs.tag }}
