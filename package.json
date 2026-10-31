@@ -1,0 +1,17 @@
+{
+  "name": "lwon-monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm test --workspaces",
+    "bench": "node bench/bench.ts"
+  },
+  "devDependencies": {
+    "@toon-format/toon": "4.4.0",
+    "@types/node": "24.10.1",
+    "gpt-tokenizer": "2.8.1",
+    "typescript": "5.9.3"
+  }
+}

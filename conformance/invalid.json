@@ -1,0 +1,18 @@
+[
+  {"name": "empty document", "lwon": ""},
+  {"name": "missing body", "lwon": "a b"},
+  {"name": "too many values in a record", "lwon": "a\n[[1 2]]"},
+  {"name": "absent marker outside a record", "lwon": "[a]\n[[[1 ~]]]"},
+  {"name": "unknown reference", "lwon": "a [b[@zzz]]\n[]"},
+  {"name": "nameless rows shorthand", "lwon": "a [@]\n[]"},
+  {"name": "duplicate key", "lwon": "a a\n[]"},
+  {"name": "unclosed table", "lwon": "a\n[[1]"},
+  {"name": "unclosed record", "lwon": "a b\n[[1 2"},
+  {"name": "invalid embedded JSON", "lwon": "a\n[[{a:1}]]"},
+  {"name": "unterminated string", "lwon": "a\n[[\"abc]]"},
+  {"name": "invalid number-like word", "lwon": "a\n[[12abc]]"},
+  {"name": "trailing content", "lwon": "a\n[[1]] extra"},
+  {"name": "trailing content after any root", "lwon": "*\n1 2"},
+  {"name": "unexpected character in header", "lwon": "a % b\n[]"},
+  {"name": "unclosed object header", "lwon": "{a b\n[1 2]"}
+]

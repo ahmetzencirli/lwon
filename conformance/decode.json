@@ -1,0 +1,20 @@
+[
+  {"name": "0.x style table", "lwon": "name age [tags]\n[\n  [ \"John\" 32 [\"t1\" \"t2\"] ]\n]", "json": [{"name": "John", "age": 32, "tags": ["t1", "t2"]}]},
+  {"name": "commas are whitespace", "lwon": "a b [c]\n[[1, 2, [3, 4]], [5, 6, []]]", "json": [{"a": 1, "b": 2, "c": [3, 4]}, {"a": 5, "b": 6, "c": []}]},
+  {"name": "record that stops early", "lwon": "a b c\n[[1]]", "json": [{"a": 1}]},
+  {"name": "absent marker", "lwon": "a b c\n[[~ 2 ~]]", "json": [{"b": 2}]},
+  {"name": "header and body on many lines", "lwon": "\n  id user[name\n    email]\n[\n[1 [Ann ann@x.io]]\n]\n", "json": [{"id": 1, "user": {"name": "Ann", "email": "ann@x.io"}}]},
+  {"name": "shorthand recursive rows", "lwon": "page[title [blocks[content [@blocks]]]]\n[[[T [[a [[b []]]]]]]]", "json": [{"page": {"title": "T", "blocks": [{"content": "a", "blocks": [{"content": "b", "blocks": []}]}]}}]},
+  {"name": "root reference", "lwon": "t [kids[@]]\n[[a [[b []]]]]", "json": [{"t": "a", "kids": [{"t": "b", "kids": []}]}]},
+  {"name": "object reference", "lwon": "v next[@]\n[[1 [2 [3 null]]]]", "json": [{"v": 1, "next": {"v": 2, "next": {"v": 3, "next": null}}}]},
+  {"name": "embedded JSON in any field", "lwon": "x\n[[{\"a\": [1, 2]}] [[1, {\"b\": \"]\"}]]]", "json": [{"x": {"a": [1, 2]}}, {"x": [1, {"b": "]"}]}]},
+  {"name": "JSON object in an object position", "lwon": "o[a]\n[[{\"z\": 1}] [[1]]]", "json": [{"o": {"z": 1}}, {"o": {"a": 1}}]},
+  {"name": "primitive in a rows position", "lwon": "[r[a]]\n[[none] [[[1]]]]", "json": [{"r": "none"}, {"r": [{"a": 1}]}]},
+  {"name": "quoted keys", "lwon": "\"first name\" \"a b\"[c]\n[[A [1]]]", "json": [{"first name": "A", "a b": {"c": 1}}]},
+  {"name": "root object", "lwon": "{a [b]}\n[1 [x y]]", "json": {"a": 1, "b": ["x", "y"]}},
+  {"name": "any root", "lwon": "*\n[1,2,{\"a\":null}]", "json": [1, 2, {"a": null}]},
+  {"name": "any root bare word", "lwon": "*\nhello", "json": "hello"},
+  {"name": "space separates fields", "lwon": "a [b]\n[[1 [2]]]", "json": [{"a": 1, "b": [2]}]},
+  {"name": "empty table", "lwon": "a\n[]", "json": []},
+  {"name": "unicode bare words", "lwon": "city\n[[İstanbul] [東京]]", "json": [{"city": "İstanbul"}, {"city": "東京"}]}
+]
