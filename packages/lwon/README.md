@@ -1,9 +1,9 @@
-# lwon
+# @lwon/core
 
 Reference implementation of [LWON](https://github.com/ahmetzencirli/lwon), Lightweight Object Notation: JSON with the keys written once. Lossless in both directions, no dependencies, and 21–42% fewer Claude tokens than minified JSON on typical data.
 
 ```ts
-import { encode, decode, PRIMER } from 'lwon';
+import { encode, decode, PRIMER } from '@lwon/core';
 
 encode([{ id: 1, name: 'Ann' }, { id: 2, name: 'Bob' }]);
 // id name
@@ -20,6 +20,6 @@ decode('id name\n[[1 Ann] [2 Bob]]');
 - `decode(text)`: LWON to JSON. Throws `LwonError` with line and column.
 - `PRIMER`: a short explanation of the format to put in an LLM prompt.
 
-CLI: `npx lwon encode|decode|stats|primer [file]`.
+CLI: `npx @lwon/core encode|decode|stats|primer [file]`, or install it globally and run `lwon`.
 
 See the [specification](https://github.com/ahmetzencirli/lwon/blob/main/SPEC.md). Created by Ahmet Zencirli. Apache-2.0.

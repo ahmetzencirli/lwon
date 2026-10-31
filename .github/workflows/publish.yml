@@ -1,4 +1,4 @@
-# Publishes the lwon package to npm when a version tag (v1.2.3 or v1.2.3-beta.4) is pushed.
+# Publishes the @lwon/core package to npm when a version tag (v1.2.3 or v1.2.3-beta.4) is pushed.
 # Uses npm trusted publishing (OIDC): no npm token is stored in the repository.
 # npm must list this repository, this file (publish.yml) and the "npm" environment
 # as a trusted publisher for the package.
@@ -34,18 +34,18 @@ jobs:
           fi
       - run: npm test
       - run: npm run build
-      - run: npm run smoke --workspace lwon
+      - run: npm run smoke --workspace packages/lwon
       # npm needs an explicit tag for prereleases. Until a stable version exists, betas
-      # go out as "latest" so `npm install lwon` gets the newest one; after that, as "beta".
+      # go out as "latest" so `npm install @lwon/core` gets the newest one; after that, as "beta".
       - name: Choose the dist-tag
         id: tag
         run: |
           version=$(node -p "require('./packages/lwon/package.json').version")
           tag=latest
           if [[ "$version" == *-* ]]; then
-            stable=$(npm view lwon versions --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{let v=[];try{v=[].concat(JSON.parse(s)).filter(x=>typeof x==="string")}catch{}console.log(v.some(x=>!x.includes("-"))?"yes":"no")})')
+            stable=$(npm view @lwon/core versions --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{let v=[];try{v=[].concat(JSON.parse(s)).filter(x=>typeof x==="string")}catch{}console.log(v.some(x=>!x.includes("-"))?"yes":"no")})')
             [ "$stable" = yes ] && tag=beta
           fi
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "Publishing $version with tag $tag"
-      - run: npm publish --workspace lwon --provenance --access public --tag ${{ steps.tag.outputs.tag }}
+      - run: npm publish --workspace packages/lwon --provenance --access public --tag ${{ steps.tag.outputs.tag }}

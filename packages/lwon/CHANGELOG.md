@@ -2,7 +2,7 @@
 
 ## 1.0.0-beta.1
 
-First published release of the LWON 1.0 reference library.
+First published release of the LWON 1.0 reference library, as `@lwon/core` on npm.
 
 - `encode` and `decode` for any JSON value, lossless in both directions
   (object key order may change). Tested against the shared conformance suite

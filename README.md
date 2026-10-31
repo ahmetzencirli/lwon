@@ -56,11 +56,11 @@ name in a `*` slot fixed that.
 ## Use it
 
 ```bash
-npm install lwon
+npm install @lwon/core
 ```
 
 ```ts
-import { encode, decode, PRIMER } from 'lwon';
+import { encode, decode, PRIMER } from '@lwon/core';
 
 const text = encode(data);   // any JSON value → LWON
 const back = decode(text);   // LWON → the same JSON value
@@ -70,10 +70,10 @@ const prompt = `${PRIMER}\n\n${text}`;
 ```
 
 ```bash
-npx lwon encode data.json      # JSON → LWON
-npx lwon decode data.lwon      # LWON → JSON
-npx lwon stats data.json       # size of JSON vs LWON
-npx lwon primer                # the prompt explanation
+npx @lwon/core encode data.json   # JSON → LWON
+npx @lwon/core decode data.lwon   # LWON → JSON
+npx @lwon/core stats data.json    # size of JSON vs LWON
+npx @lwon/core primer             # the prompt explanation
 ```
 
 ## With language models
