@@ -1,8 +1,10 @@
-# Publishes the @lwon/core package to npm when a version tag (v1.2.3 or v1.2.3-beta.4) is pushed.
-# Uses npm trusted publishing (OIDC): no npm token is stored in the repository.
+# Stages a release of @lwon/core on npm when a version tag (v1.2.3 or v1.2.3-beta.4) is pushed.
+# Uses npm trusted publishing (OIDC): no npm token is stored in the repository. The trusted
+# publisher allows staging only, so nothing is installable until a maintainer approves the
+# staged version on npmjs.com (Staged Packages) or with `npm stage approve`, using 2FA.
 # npm must list this repository, this file (publish.yml) and the "npm" environment
-# as a trusted publisher for the package.
-name: Publish to npm
+# as the trusted publisher for the package.
+name: Stage npm release
 
 on:
   push:
@@ -22,7 +24,7 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      # Trusted publishing needs npm 11.5.1 or later.
+      # Trusted publishing needs npm 11.5.1 or later; `npm stage` needs 11.15.0.
       - run: npm install -g npm@11.21.0
       - run: npm ci
       - name: Check the tag matches the package version
@@ -44,8 +46,13 @@ jobs:
           tag=latest
           if [[ "$version" == *-* ]]; then
             stable=$(npm view @lwon/core versions --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{let v=[];try{v=[].concat(JSON.parse(s)).filter(x=>typeof x==="string")}catch{}console.log(v.some(x=>!x.includes("-"))?"yes":"no")})')
-            [ "$stable" = yes ] && tag=beta
+            if [ "$stable" = yes ]; then tag=beta; fi
           fi
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
           echo "Publishing $version with tag $tag"
-      - run: npm publish --workspace packages/lwon --provenance --access public --tag ${{ steps.tag.outputs.tag }}
+      # `npm stage` does not handle workspaces, so it runs inside the package folder.
+      - name: Stage the release on npm
+        working-directory: packages/lwon
+        run: npm stage publish --provenance --access public --tag ${{ steps.tag.outputs.tag }}
+      - name: Next step
+        run: echo "Staged. Approve it with 2FA on npmjs.com under Staged Packages, or run 'npm stage list' and 'npm stage approve <id>'." >> "$GITHUB_STEP_SUMMARY"
