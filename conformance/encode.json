@@ -17,7 +17,7 @@
   {"name":"root string","json":"hello world","lwon":"*\n\"hello world\""},
   {"name":"root number","json":-0.0125,"lwon":"*\n-0.0125"},
   {"name":"root null","json":null,"lwon":"*\nnull"},
-  {"name":"root object","json":{"users":[{"id":1,"name":"Ann","tags":["a"]},{"id":2,"name":"Bob"}],"meta":{"page":1,"total":2}},"lwon":"{[users[id name [tags]]] meta[page total]}\n[[[1 Ann [a]] [2 Bob]] [1 2]]"},
+  {"name":"root object","json":{"users":[{"id":1,"name":"Ann","tags":["a"]},{"id":2,"name":"Bob"}],"meta":{"page":1,"total":2}},"lwon":"{[users[id name [tags]]] meta[page total]}\n[[\n[1 Ann [a]]\n[2 Bob]\n] [1 2]]"},
   {"name":"keys that need quotes","json":[{"first name":"A","":1,"@type":"x","a\"b":2,"with\nnewline":3}],"lwon":"\"first name\" \"\" \"@type\" \"a\\\"b\" \"with\\nnewline\"\n[\n[A 1 x 2 3]\n]"},
   {"name":"keys that look like literals","json":[{"123":"a","true":1,"null":2,"-1":3}],"lwon":"123 true null \"-1\"\n[\n[a 1 2 3]\n]"},
   {"name":"unicode keys and values","json":[{"şehir":"İstanbul","日本":"東京","emoji":"🚀 launch","zwj":"👨‍👩‍👧"}],"lwon":"şehir 日本 emoji zwj\n[\n[İstanbul 東京 \"🚀 launch\" \"👨‍👩‍👧\"]\n]"},

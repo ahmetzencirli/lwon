@@ -1,0 +1,90 @@
+{
+  "tokenizer": "o200k_base (gpt-tokenizer 2.8.1)",
+  "toon": "@toon-format/toon 4.4.0",
+  "results": [
+    {
+      "name": "users",
+      "shape": "Flat table, 100 rows",
+      "tokens": {
+        "pretty": 5042,
+        "min": 2942,
+        "toon": 1744,
+        "lwon": 1649
+      },
+      "bytes": {
+        "min": 10172,
+        "lwon": 5406
+      }
+    },
+    {
+      "name": "orders",
+      "shape": "Nested objects and arrays, 50 orders",
+      "tokens": {
+        "pretty": 9226,
+        "min": 5400,
+        "toon": 5753,
+        "lwon": 3624
+      },
+      "bytes": {
+        "min": 15094,
+        "lwon": 7331
+      }
+    },
+    {
+      "name": "issues",
+      "shape": "GitHub-style issues with nullable objects, 30 rows",
+      "tokens": {
+        "pretty": 4607,
+        "min": 2971,
+        "toon": 3526,
+        "lwon": 2018
+      },
+      "bytes": {
+        "min": 10460,
+        "lwon": 6315
+      }
+    },
+    {
+      "name": "menu",
+      "shape": "Recursive tree, 3 levels",
+      "tokens": {
+        "pretty": 696,
+        "min": 395,
+        "toon": 530,
+        "lwon": 282
+      },
+      "bytes": {
+        "min": 1167,
+        "lwon": 577
+      }
+    },
+    {
+      "name": "logs",
+      "shape": "Log events with optional fields, 80 rows",
+      "tokens": {
+        "pretty": 4522,
+        "min": 3126,
+        "toon": 3619,
+        "lwon": 2513
+      },
+      "bytes": {
+        "min": 9271,
+        "lwon": 6491
+      }
+    },
+    {
+      "name": "search",
+      "shape": "Search tool result: object with a result list",
+      "tokens": {
+        "pretty": 2722,
+        "min": 1985,
+        "toon": 1608,
+        "lwon": 1623
+      },
+      "bytes": {
+        "min": 7480,
+        "lwon": 5806
+      }
+    }
+  ]
+}

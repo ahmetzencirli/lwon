@@ -1,0 +1,1529 @@
+[
+  {
+    "orderId": "ORD-10000",
+    "createdAt": "2026-01-26T01:30:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 636,
+      "name": "Mei Chen",
+      "address": {
+        "city": "São Paulo",
+        "zip": "69785"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-9793",
+        "qty": 3,
+        "price": 162.33
+      },
+      {
+        "sku": "SKU-9573",
+        "qty": 3,
+        "price": 31.86
+      },
+      {
+        "sku": "SKU-892",
+        "qty": 3,
+        "price": 6.96
+      },
+      {
+        "sku": "SKU-4911",
+        "qty": 3,
+        "price": 135.84
+      }
+    ],
+    "tags": [
+      "express",
+      "promo"
+    ]
+  },
+  {
+    "orderId": "ORD-10001",
+    "createdAt": "2026-06-26T15:15:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 574,
+      "name": "John Yılmaz",
+      "address": {
+        "city": "Istanbul",
+        "zip": "31543"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-3742",
+        "qty": 2,
+        "price": 194.89
+      },
+      {
+        "sku": "SKU-4095",
+        "qty": 3,
+        "price": 147.9
+      },
+      {
+        "sku": "SKU-160",
+        "qty": 3,
+        "price": 175.06
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10002",
+    "createdAt": "2026-08-26T11:22:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 626,
+      "name": "Bob García",
+      "address": {
+        "city": "New York",
+        "zip": "99625"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5944",
+        "qty": 1,
+        "price": 128.82
+      }
+    ],
+    "tags": [
+      "express",
+      "b2b"
+    ]
+  },
+  {
+    "orderId": "ORD-10003",
+    "createdAt": "2026-11-11T14:10:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 536,
+      "name": "Fatima Khan",
+      "address": {
+        "city": "New York",
+        "zip": "59192"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8959",
+        "qty": 3,
+        "price": 0.03
+      },
+      {
+        "sku": "SKU-603",
+        "qty": 1,
+        "price": 181.92
+      },
+      {
+        "sku": "SKU-0",
+        "qty": 1,
+        "price": 104.79
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10004",
+    "createdAt": "2026-09-18T00:24:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 569,
+      "name": "Mehmet Khan",
+      "address": {
+        "city": "Tokyo",
+        "zip": "14492"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5895",
+        "qty": 3,
+        "price": 116.01
+      },
+      {
+        "sku": "SKU-4150",
+        "qty": 2,
+        "price": 82.24
+      },
+      {
+        "sku": "SKU-5903",
+        "qty": 1,
+        "price": 27.03
+      }
+    ],
+    "tags": [
+      "b2b",
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10005",
+    "createdAt": "2026-12-27T10:35:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 633,
+      "name": "Kenji Demir",
+      "address": {
+        "city": "Tokyo",
+        "zip": "40901"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5084",
+        "qty": 3,
+        "price": 46.66
+      },
+      {
+        "sku": "SKU-1507",
+        "qty": 1,
+        "price": 196.53
+      },
+      {
+        "sku": "SKU-5057",
+        "qty": 3,
+        "price": 4.25
+      },
+      {
+        "sku": "SKU-6517",
+        "qty": 2,
+        "price": 197.74
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10006",
+    "createdAt": "2026-12-07T22:18:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 577,
+      "name": "Alice Smith",
+      "address": {
+        "city": "London",
+        "zip": "66431"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5104",
+        "qty": 2,
+        "price": 89.19
+      },
+      {
+        "sku": "SKU-1762",
+        "qty": 2,
+        "price": 179.96
+      }
+    ],
+    "tags": [
+      "b2b"
+    ]
+  },
+  {
+    "orderId": "ORD-10007",
+    "createdAt": "2026-11-17T20:26:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 590,
+      "name": "Mei Khan",
+      "address": {
+        "city": "Tokyo",
+        "zip": "46787"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-54",
+        "qty": 3,
+        "price": 76.43
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10008",
+    "createdAt": "2026-01-04T15:16:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 591,
+      "name": "Fatima Kaya",
+      "address": {
+        "city": "Tokyo",
+        "zip": "29366"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-6206",
+        "qty": 2,
+        "price": 70
+      },
+      {
+        "sku": "SKU-6158",
+        "qty": 2,
+        "price": 163.18
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10009",
+    "createdAt": "2026-03-10T21:51:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 593,
+      "name": "Mehmet Khan",
+      "address": {
+        "city": "Tokyo",
+        "zip": "77683"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4052",
+        "qty": 2,
+        "price": 32.48
+      },
+      {
+        "sku": "SKU-9016",
+        "qty": 2,
+        "price": 34.77
+      },
+      {
+        "sku": "SKU-347",
+        "qty": 3,
+        "price": 19
+      },
+      {
+        "sku": "SKU-5344",
+        "qty": 2,
+        "price": 119.62
+      }
+    ],
+    "tags": [
+      "b2b",
+      "b2b"
+    ]
+  },
+  {
+    "orderId": "ORD-10010",
+    "createdAt": "2026-07-26T21:05:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 684,
+      "name": "Bob Khan",
+      "address": {
+        "city": "New York",
+        "zip": "49658"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-3717",
+        "qty": 2,
+        "price": 128.99
+      },
+      {
+        "sku": "SKU-8714",
+        "qty": 3,
+        "price": 47.67
+      }
+    ],
+    "tags": [
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10011",
+    "createdAt": "2026-07-21T13:24:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 544,
+      "name": "Carlos Yılmaz",
+      "address": {
+        "city": "Ankara",
+        "zip": "14353"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-3389",
+        "qty": 3,
+        "price": 105.4
+      }
+    ],
+    "tags": [
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10012",
+    "createdAt": "2026-12-21T10:20:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 558,
+      "name": "Mei Smith",
+      "address": {
+        "city": "Istanbul",
+        "zip": "85997"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-1179",
+        "qty": 3,
+        "price": 8.74
+      },
+      {
+        "sku": "SKU-7522",
+        "qty": 2,
+        "price": 13.09
+      }
+    ],
+    "tags": [
+      "promo"
+    ]
+  },
+  {
+    "orderId": "ORD-10013",
+    "createdAt": "2026-03-24T05:58:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 583,
+      "name": "Ayşe García",
+      "address": {
+        "city": "Istanbul",
+        "zip": "44453"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4005",
+        "qty": 1,
+        "price": 192.46
+      },
+      {
+        "sku": "SKU-7655",
+        "qty": 1,
+        "price": 24.9
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10014",
+    "createdAt": "2026-09-23T23:51:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 549,
+      "name": "John Chen",
+      "address": {
+        "city": "São Paulo",
+        "zip": "29011"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8414",
+        "qty": 3,
+        "price": 186.39
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10015",
+    "createdAt": "2026-02-01T22:40:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 518,
+      "name": "Fatima Khan",
+      "address": {
+        "city": "São Paulo",
+        "zip": "11326"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-2263",
+        "qty": 2,
+        "price": 73.87
+      },
+      {
+        "sku": "SKU-777",
+        "qty": 1,
+        "price": 180.03
+      },
+      {
+        "sku": "SKU-9917",
+        "qty": 2,
+        "price": 41.11
+      },
+      {
+        "sku": "SKU-336",
+        "qty": 3,
+        "price": 7.92
+      }
+    ],
+    "tags": [
+      "express",
+      "promo"
+    ]
+  },
+  {
+    "orderId": "ORD-10016",
+    "createdAt": "2026-12-22T03:21:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 513,
+      "name": "Fatima Chen",
+      "address": {
+        "city": "Tokyo",
+        "zip": "69223"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-639",
+        "qty": 3,
+        "price": 136.93
+      },
+      {
+        "sku": "SKU-6238",
+        "qty": 2,
+        "price": 161.63
+      },
+      {
+        "sku": "SKU-2243",
+        "qty": 2,
+        "price": 20.53
+      }
+    ],
+    "tags": [
+      "gift",
+      "gift"
+    ]
+  },
+  {
+    "orderId": "ORD-10017",
+    "createdAt": "2026-08-18T13:25:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 570,
+      "name": "Carlos Khan",
+      "address": {
+        "city": "Istanbul",
+        "zip": "66020"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-6484",
+        "qty": 3,
+        "price": 170.93
+      },
+      {
+        "sku": "SKU-4855",
+        "qty": 3,
+        "price": 29.37
+      },
+      {
+        "sku": "SKU-4589",
+        "qty": 2,
+        "price": 80.06
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10018",
+    "createdAt": "2026-12-26T10:55:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 519,
+      "name": "Carlos Müller",
+      "address": {
+        "city": "Ankara",
+        "zip": "54383"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-3438",
+        "qty": 3,
+        "price": 71.06
+      },
+      {
+        "sku": "SKU-9571",
+        "qty": 1,
+        "price": 189.75
+      },
+      {
+        "sku": "SKU-7407",
+        "qty": 2,
+        "price": 59.35
+      },
+      {
+        "sku": "SKU-2677",
+        "qty": 2,
+        "price": 53.96
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10019",
+    "createdAt": "2026-01-20T03:15:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 659,
+      "name": "Ayşe Khan",
+      "address": {
+        "city": "New York",
+        "zip": "50769"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-6427",
+        "qty": 2,
+        "price": 60.16
+      },
+      {
+        "sku": "SKU-7817",
+        "qty": 3,
+        "price": 147.94
+      }
+    ],
+    "tags": [
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10020",
+    "createdAt": "2026-05-17T23:17:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 582,
+      "name": "Alice Khan",
+      "address": {
+        "city": "Berlin",
+        "zip": "27071"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-7906",
+        "qty": 2,
+        "price": 197.7
+      },
+      {
+        "sku": "SKU-8701",
+        "qty": 3,
+        "price": 118.96
+      },
+      {
+        "sku": "SKU-5083",
+        "qty": 2,
+        "price": 171.01
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10021",
+    "createdAt": "2026-01-17T00:07:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 533,
+      "name": "Alice Kaya",
+      "address": {
+        "city": "Berlin",
+        "zip": "97206"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-7167",
+        "qty": 3,
+        "price": 162.12
+      },
+      {
+        "sku": "SKU-2659",
+        "qty": 3,
+        "price": 73
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10022",
+    "createdAt": "2026-01-21T18:53:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 550,
+      "name": "Fatima Khan",
+      "address": {
+        "city": "Ankara",
+        "zip": "90332"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-6272",
+        "qty": 2,
+        "price": 102.49
+      },
+      {
+        "sku": "SKU-9127",
+        "qty": 2,
+        "price": 191.64
+      },
+      {
+        "sku": "SKU-8190",
+        "qty": 1,
+        "price": 175.17
+      },
+      {
+        "sku": "SKU-7185",
+        "qty": 3,
+        "price": 48.56
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10023",
+    "createdAt": "2026-11-11T13:51:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 573,
+      "name": "Mei Yılmaz",
+      "address": {
+        "city": "Berlin",
+        "zip": "96975"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5676",
+        "qty": 2,
+        "price": 39.27
+      },
+      {
+        "sku": "SKU-859",
+        "qty": 3,
+        "price": 57.23
+      },
+      {
+        "sku": "SKU-2876",
+        "qty": 3,
+        "price": 132.28
+      },
+      {
+        "sku": "SKU-2469",
+        "qty": 1,
+        "price": 41.5
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10024",
+    "createdAt": "2026-11-28T15:23:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 535,
+      "name": "Mei García",
+      "address": {
+        "city": "Tokyo",
+        "zip": "41822"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4756",
+        "qty": 2,
+        "price": 131.99
+      },
+      {
+        "sku": "SKU-2170",
+        "qty": 3,
+        "price": 162.09
+      }
+    ],
+    "tags": [
+      "gift"
+    ]
+  },
+  {
+    "orderId": "ORD-10025",
+    "createdAt": "2026-04-05T20:05:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 651,
+      "name": "Alice Yılmaz",
+      "address": {
+        "city": "New York",
+        "zip": "16299"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4762",
+        "qty": 1,
+        "price": 123.95
+      },
+      {
+        "sku": "SKU-5602",
+        "qty": 2,
+        "price": 167.84
+      },
+      {
+        "sku": "SKU-9788",
+        "qty": 1,
+        "price": 0.44
+      },
+      {
+        "sku": "SKU-8257",
+        "qty": 3,
+        "price": 104.67
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10026",
+    "createdAt": "2026-04-07T19:27:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 557,
+      "name": "Fatima Khan",
+      "address": {
+        "city": "São Paulo",
+        "zip": "96767"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8582",
+        "qty": 3,
+        "price": 140.71
+      },
+      {
+        "sku": "SKU-8543",
+        "qty": 2,
+        "price": 39.04
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10027",
+    "createdAt": "2026-07-18T06:58:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 644,
+      "name": "Kenji Kaya",
+      "address": {
+        "city": "São Paulo",
+        "zip": "16308"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5160",
+        "qty": 2,
+        "price": 199.95
+      },
+      {
+        "sku": "SKU-7606",
+        "qty": 3,
+        "price": 162.39
+      }
+    ],
+    "tags": [
+      "promo",
+      "promo"
+    ]
+  },
+  {
+    "orderId": "ORD-10028",
+    "createdAt": "2026-08-26T08:33:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 573,
+      "name": "Alice Khan",
+      "address": {
+        "city": "Ankara",
+        "zip": "70896"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-7789",
+        "qty": 1,
+        "price": 4.15
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10029",
+    "createdAt": "2026-03-27T23:20:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 679,
+      "name": "John Kaya",
+      "address": {
+        "city": "Berlin",
+        "zip": "25311"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8983",
+        "qty": 3,
+        "price": 160.44
+      },
+      {
+        "sku": "SKU-8375",
+        "qty": 3,
+        "price": 143.83
+      },
+      {
+        "sku": "SKU-2451",
+        "qty": 1,
+        "price": 82.39
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10030",
+    "createdAt": "2026-12-05T13:49:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 681,
+      "name": "Kenji Khan",
+      "address": {
+        "city": "Ankara",
+        "zip": "27838"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8870",
+        "qty": 2,
+        "price": 166.26
+      },
+      {
+        "sku": "SKU-637",
+        "qty": 1,
+        "price": 123.23
+      },
+      {
+        "sku": "SKU-3862",
+        "qty": 1,
+        "price": 125.93
+      }
+    ],
+    "tags": [
+      "gift",
+      "gift"
+    ]
+  },
+  {
+    "orderId": "ORD-10031",
+    "createdAt": "2026-01-06T05:56:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 579,
+      "name": "Carlos Smith",
+      "address": {
+        "city": "New York",
+        "zip": "30592"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-6882",
+        "qty": 2,
+        "price": 96.16
+      },
+      {
+        "sku": "SKU-9740",
+        "qty": 2,
+        "price": 12.6
+      }
+    ],
+    "tags": [
+      "b2b",
+      "b2b"
+    ]
+  },
+  {
+    "orderId": "ORD-10032",
+    "createdAt": "2026-02-05T13:58:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 546,
+      "name": "Alice García",
+      "address": {
+        "city": "Berlin",
+        "zip": "40579"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4477",
+        "qty": 1,
+        "price": 99.05
+      },
+      {
+        "sku": "SKU-7428",
+        "qty": 1,
+        "price": 4.79
+      },
+      {
+        "sku": "SKU-2820",
+        "qty": 1,
+        "price": 86.78
+      }
+    ],
+    "tags": [
+      "promo",
+      "b2b"
+    ]
+  },
+  {
+    "orderId": "ORD-10033",
+    "createdAt": "2026-05-18T05:55:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 639,
+      "name": "Elif Chen",
+      "address": {
+        "city": "Tokyo",
+        "zip": "40838"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5708",
+        "qty": 1,
+        "price": 98.08
+      },
+      {
+        "sku": "SKU-2269",
+        "qty": 2,
+        "price": 92.11
+      },
+      {
+        "sku": "SKU-1354",
+        "qty": 2,
+        "price": 67.45
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10034",
+    "createdAt": "2026-05-09T05:46:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 586,
+      "name": "Elif Khan",
+      "address": {
+        "city": "New York",
+        "zip": "17938"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-1264",
+        "qty": 1,
+        "price": 165.32
+      },
+      {
+        "sku": "SKU-2233",
+        "qty": 2,
+        "price": 81.3
+      },
+      {
+        "sku": "SKU-7690",
+        "qty": 2,
+        "price": 98.84
+      }
+    ],
+    "tags": [
+      "b2b",
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10035",
+    "createdAt": "2026-03-20T22:56:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 660,
+      "name": "Fatima Kaya",
+      "address": {
+        "city": "Ankara",
+        "zip": "20988"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-7142",
+        "qty": 2,
+        "price": 109.59
+      },
+      {
+        "sku": "SKU-2900",
+        "qty": 2,
+        "price": 174.75
+      },
+      {
+        "sku": "SKU-3146",
+        "qty": 2,
+        "price": 198.94
+      },
+      {
+        "sku": "SKU-8754",
+        "qty": 3,
+        "price": 2.49
+      }
+    ],
+    "tags": [
+      "promo"
+    ]
+  },
+  {
+    "orderId": "ORD-10036",
+    "createdAt": "2026-03-03T01:25:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 667,
+      "name": "Elif Chen",
+      "address": {
+        "city": "Istanbul",
+        "zip": "94060"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-6093",
+        "qty": 1,
+        "price": 96.51
+      },
+      {
+        "sku": "SKU-7952",
+        "qty": 3,
+        "price": 169.85
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10037",
+    "createdAt": "2026-03-03T11:12:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 610,
+      "name": "Fatima Demir",
+      "address": {
+        "city": "Tokyo",
+        "zip": "76536"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-1587",
+        "qty": 1,
+        "price": 4.12
+      },
+      {
+        "sku": "SKU-7725",
+        "qty": 1,
+        "price": 8.85
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10038",
+    "createdAt": "2026-04-14T10:05:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 692,
+      "name": "Carlos García",
+      "address": {
+        "city": "Berlin",
+        "zip": "17683"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5753",
+        "qty": 1,
+        "price": 32.18
+      },
+      {
+        "sku": "SKU-795",
+        "qty": 1,
+        "price": 38.07
+      },
+      {
+        "sku": "SKU-7283",
+        "qty": 3,
+        "price": 76.61
+      },
+      {
+        "sku": "SKU-2100",
+        "qty": 2,
+        "price": 150.93
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10039",
+    "createdAt": "2026-02-13T22:24:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 520,
+      "name": "Kenji Chen",
+      "address": {
+        "city": "London",
+        "zip": "51609"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4136",
+        "qty": 1,
+        "price": 159.37
+      },
+      {
+        "sku": "SKU-6700",
+        "qty": 1,
+        "price": 182.94
+      }
+    ],
+    "tags": [
+      "b2b",
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10040",
+    "createdAt": "2026-04-20T05:11:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 685,
+      "name": "Bob Demir",
+      "address": {
+        "city": "Ankara",
+        "zip": "91505"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-3988",
+        "qty": 2,
+        "price": 72.56
+      },
+      {
+        "sku": "SKU-5103",
+        "qty": 3,
+        "price": 152.8
+      }
+    ],
+    "tags": [
+      "gift"
+    ]
+  },
+  {
+    "orderId": "ORD-10041",
+    "createdAt": "2026-02-03T19:30:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 652,
+      "name": "John Khan",
+      "address": {
+        "city": "New York",
+        "zip": "68752"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8809",
+        "qty": 1,
+        "price": 159.6
+      },
+      {
+        "sku": "SKU-4304",
+        "qty": 2,
+        "price": 193.73
+      },
+      {
+        "sku": "SKU-7837",
+        "qty": 2,
+        "price": 37.95
+      }
+    ],
+    "tags": [
+      "gift"
+    ]
+  },
+  {
+    "orderId": "ORD-10042",
+    "createdAt": "2026-11-27T13:57:00.000Z",
+    "status": "shipped",
+    "customer": {
+      "id": 534,
+      "name": "John Chen",
+      "address": {
+        "city": "Istanbul",
+        "zip": "24195"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-1460",
+        "qty": 3,
+        "price": 192.44
+      },
+      {
+        "sku": "SKU-5337",
+        "qty": 1,
+        "price": 93.16
+      },
+      {
+        "sku": "SKU-4520",
+        "qty": 1,
+        "price": 56.16
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10043",
+    "createdAt": "2026-02-28T03:28:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 533,
+      "name": "Kenji García",
+      "address": {
+        "city": "New York",
+        "zip": "69502"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-4058",
+        "qty": 3,
+        "price": 109.79
+      },
+      {
+        "sku": "SKU-4431",
+        "qty": 1,
+        "price": 59.44
+      },
+      {
+        "sku": "SKU-1177",
+        "qty": 3,
+        "price": 155.79
+      },
+      {
+        "sku": "SKU-7623",
+        "qty": 2,
+        "price": 53.28
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10044",
+    "createdAt": "2026-07-21T04:56:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 509,
+      "name": "Bob Müller",
+      "address": {
+        "city": "New York",
+        "zip": "30462"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-8106",
+        "qty": 3,
+        "price": 152.15
+      }
+    ],
+    "tags": []
+  },
+  {
+    "orderId": "ORD-10045",
+    "createdAt": "2026-04-09T05:16:00.000Z",
+    "status": "refunded",
+    "customer": {
+      "id": 519,
+      "name": "Bob Kaya",
+      "address": {
+        "city": "Ankara",
+        "zip": "27761"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-9666",
+        "qty": 1,
+        "price": 64.15
+      }
+    ],
+    "tags": [
+      "gift",
+      "promo"
+    ]
+  },
+  {
+    "orderId": "ORD-10046",
+    "createdAt": "2026-07-20T03:53:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 530,
+      "name": "John Khan",
+      "address": {
+        "city": "Istanbul",
+        "zip": "17675"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-9941",
+        "qty": 3,
+        "price": 74.34
+      }
+    ],
+    "tags": [
+      "gift",
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10047",
+    "createdAt": "2026-02-24T07:18:00.000Z",
+    "status": "delivered",
+    "customer": {
+      "id": 591,
+      "name": "Bob Kaya",
+      "address": {
+        "city": "Tokyo",
+        "zip": "64204"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-7117",
+        "qty": 1,
+        "price": 64.16
+      },
+      {
+        "sku": "SKU-4783",
+        "qty": 3,
+        "price": 18.44
+      },
+      {
+        "sku": "SKU-8751",
+        "qty": 2,
+        "price": 154.42
+      }
+    ],
+    "tags": [
+      "b2b"
+    ]
+  },
+  {
+    "orderId": "ORD-10048",
+    "createdAt": "2026-12-06T00:43:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 697,
+      "name": "Elif Chen",
+      "address": {
+        "city": "Istanbul",
+        "zip": "90692"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-2031",
+        "qty": 1,
+        "price": 188.16
+      },
+      {
+        "sku": "SKU-4139",
+        "qty": 1,
+        "price": 132.95
+      },
+      {
+        "sku": "SKU-3909",
+        "qty": 2,
+        "price": 36.52
+      },
+      {
+        "sku": "SKU-9177",
+        "qty": 3,
+        "price": 6.92
+      }
+    ],
+    "tags": [
+      "express",
+      "express"
+    ]
+  },
+  {
+    "orderId": "ORD-10049",
+    "createdAt": "2026-10-27T12:55:00.000Z",
+    "status": "paid",
+    "customer": {
+      "id": 667,
+      "name": "Kenji Khan",
+      "address": {
+        "city": "Ankara",
+        "zip": "83045"
+      }
+    },
+    "items": [
+      {
+        "sku": "SKU-5047",
+        "qty": 2,
+        "price": 58.52
+      },
+      {
+        "sku": "SKU-953",
+        "qty": 3,
+        "price": 192.85
+      },
+      {
+        "sku": "SKU-294",
+        "qty": 3,
+        "price": 122.98
+      },
+      {
+        "sku": "SKU-5148",
+        "qty": 3,
+        "price": 27.89
+      }
+    ],
+    "tags": [
+      "express"
+    ]
+  }
+]

@@ -18,7 +18,10 @@ Data below is in LWON, a compact form of JSON. Line 1 is a header naming the fie
 
 ```text
 {[orders[id customer[name city] [items[sku qty price]]]] page}
-[[[A-1 [Ann Istanbul] [[SKU1 2 9.99] [SKU2 1 19.5]]] [A-2 [Bob Izmir] []]] 1]
+[[
+[A-1 [Ann Istanbul] [[SKU1 2 9.99] [SKU2 1 19.5]]]
+[A-2 [Bob Izmir] []]
+] 1]
 ```
 
 reads as

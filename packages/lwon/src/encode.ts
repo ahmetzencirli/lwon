@@ -22,7 +22,7 @@ export function encode(value: unknown, options: EncodeOptions = {}): string {
   const header = inferHeader(data);
   const head = writeHeader(header);
   if (header.root === 'any') return `${head}\n${w.any(data)}`;
-  if (header.root === 'object') return `${head}\n${w.record(data as Obj, header.shape)}`;
+  if (header.root === 'object') return `${head}\n${w.record(data as Obj, header.shape, true)}`;
   const rows = (data as Json[]).map((row) => w.row(row, header.shape));
   return `${head}\n[\n${rows.join('\n')}\n]`;
 }
@@ -173,14 +173,15 @@ class Writer {
     this.bareStrings = bareStrings;
   }
 
-  value(v: Json, kind: Kind, shape?: Shape): string {
+  /** `lines` puts each row of a rows value on its own line, as in a root table. */
+  value(v: Json, kind: Kind, shape?: Shape, lines = false): string {
     if (kind === 'any') return this.any(v);
     if (Array.isArray(v)) {
       if (kind === 'object') throw new Error('LWON internal error: array in an object position');
       const items = kind === 'list'
         ? v.map((e) => this.any(e))
         : v.map((e) => this.row(e, shape!));
-      return `[${items.join(' ')}]`;
+      return lines && kind === 'rows' && items.length > 1 ? `[\n${items.join('\n')}\n]` : `[${items.join(' ')}]`;
     }
     if (isObj(v)) return kind === 'object' ? this.row(v, shape!) : JSON.stringify(v);
     return this.primitive(v);
@@ -192,8 +193,8 @@ class Writer {
     return asRecord(v, shape) ? this.record(v, shape) : JSON.stringify(v);
   }
 
-  record(o: Obj, shape: Shape): string {
-    const parts = shape.fields.map((f) => (Object.hasOwn(o, f.key) ? this.value(o[f.key], f.kind, f.shape) : '~'));
+  record(o: Obj, shape: Shape, lines = false): string {
+    const parts = shape.fields.map((f) => (Object.hasOwn(o, f.key) ? this.value(o[f.key], f.kind, f.shape, lines) : '~'));
     while (parts.at(-1) === '~') parts.pop();
     return `[${parts.join(' ')}]`;
   }

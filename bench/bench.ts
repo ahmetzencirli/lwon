@@ -1,6 +1,6 @@
 // Token and byte comparison of JSON, TOON and LWON on synthetic but realistic datasets.
-// Run with `npm run bench`; writes bench/RESULTS.md.
-import { writeFileSync } from 'node:fs';
+// Run with `npm run bench`; writes bench/RESULTS.md, bench/results.json and the datasets in bench/data/.
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { encode as countTokens } from 'gpt-tokenizer';
 import { encode as toToon } from '@toon-format/toon';
 import { decode, encode } from '../packages/lwon/src/index.ts';
@@ -106,6 +106,8 @@ const lines = [
   '| Dataset | Shape | JSON indented | JSON minified | TOON | LWON | LWON vs JSON | LWON vs TOON |',
   '|---|---|--:|--:|--:|--:|--:|--:|',
 ];
+const results: object[] = [];
+mkdirSync(new URL('data/', import.meta.url), { recursive: true });
 for (const [name, shape, data] of datasets) {
   const lwon = encode(data);
   if (JSON.stringify(canonical(decode(lwon))) !== JSON.stringify(canonical(data))) throw new Error(`${name}: LWON did not round-trip`);
@@ -116,6 +118,10 @@ for (const [name, shape, data] of datasets) {
     lwon: countTokens(lwon).length,
   };
   lines.push(`| ${name} | ${shape} | ${t.pretty} | ${t.min} | ${t.toon} | ${t.lwon} | ${pct(t.lwon, t.min)} | ${pct(t.lwon, t.toon)} |`);
+  results.push({ name, shape, tokens: t, bytes: { min: Buffer.byteLength(JSON.stringify(data)), lwon: Buffer.byteLength(lwon) } });
+  writeFileSync(new URL(`data/${name}.json`, import.meta.url), JSON.stringify(data, null, 2) + '\n');
   console.log(name.padEnd(8), t);
 }
 writeFileSync(new URL('RESULTS.md', import.meta.url), lines.join('\n') + '\n');
+const meta = { tokenizer: 'o200k_base (gpt-tokenizer 2.8.1)', toon: '@toon-format/toon 4.4.0' };
+writeFileSync(new URL('results.json', import.meta.url), JSON.stringify({ ...meta, results }, null, 2) + '\n');
