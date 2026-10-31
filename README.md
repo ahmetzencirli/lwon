@@ -2,8 +2,8 @@
 
 LWON is JSON with the keys written once. A header names the fields; the body
 holds only the values, by position. Any JSON value converts to LWON and back
-without loss, and the result is 18–44% fewer tokens than minified JSON on
-typical API and tool data.
+without loss, and the result is 22–42% fewer Claude tokens than minified JSON
+on typical API and tool data, with no loss of accuracy in our tests.
 
 ```
 {[orders[id customer[name city] [items[sku qty price]]]] page}
@@ -28,14 +28,21 @@ data, where table formats fall back to verbose layouts.
 
 | Dataset | JSON (minified) | TOON | LWON |
 |---|--:|--:|--:|
-| Flat table, 100 rows | 2942 | 1744 | **1649** |
-| Nested orders | 5400 | 5753 | **3624** |
-| GitHub-style issues | 2971 | 3526 | **2018** |
-| Recursive menu | 395 | 530 | **282** |
-| Logs with optional fields | 3126 | 3619 | **2513** |
-| Search tool result | 1985 | **1608** | 1623 |
+| Flat table, 100 rows | 4295 | 2510 | **2503** |
+| Nested orders | 8259 | 7435 | **4808** |
+| GitHub-style issues | 4378 | 4414 | **2760** |
+| Recursive menu | 562 | 578 | **362** |
+| Logs with optional fields | 4393 | 4472 | **3222** |
+| Search tool result | 2930 | **2200** | 2298 |
 
-Tokens, o200k tokenizer. Full table and method in [bench/RESULTS.md](bench/RESULTS.md).
+Claude tokens (Haiku, Sonnet and Opus 5.5 share a tokenizer), counted with the
+`count_tokens` API. o200k counts are in [bench/RESULTS.md](bench/RESULTS.md).
+
+**Accuracy.** Claude Haiku 5.5, Sonnet 5.5 and Opus 5.5 answered 44 questions
+about this data (lookups, counts, nested fields, trees, absent versus null) in
+each format. At medium effort every model answered every question correctly in
+JSON, TOON and LWON. At low effort Haiku made one counting slip, in LWON. See
+[bench/eval/EVAL.md](bench/eval/EVAL.md).
 
 ## Use it
 
@@ -81,14 +88,18 @@ tool or API layer; asking the model to convert saves nothing.
 npm install
 npm test         # conformance cases and 3000 fuzzed round trips
 npm run bench    # regenerate bench/RESULTS.md
+
+# Comprehension eval against the Claude API (needs ANTHROPIC_API_KEY; about $1.30 for all three models)
+npm run eval:tokens
+npm run eval -- --budget 2
+npm run eval:report
 ```
 
 ## Status
 
 1.0 beta. The format is stable enough to try; it may still change before 1.0.
-Planned: an MCP proxy that converts any MCP server's tool results to LWON,
-comprehension benchmarks with real models, Claude token counts, and ports to
-Python and Go.
+Planned: an MCP proxy that converts any MCP server's tool results to LWON, a
+harder comprehension eval with repeated trials, and ports to Python and Go.
 
 ## License
 

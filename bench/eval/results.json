@@ -1,0 +1,656 @@
+{
+  "summary": {
+    "claude-haiku-5-5": {
+      "json": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.010080540000000002,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "toon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.008026334999999999,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.008697125,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    "claude-haiku-5-5 (effort low)": {
+      "json": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.00962654,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "toon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.007782835,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon": {
+        "correct": 43,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.008136125000000001,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            11,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    "claude-opus-5-5": {
+      "json": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.3309137999999999,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "toon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.21407719999999997,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.23216800000000004,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      }
+    },
+    "claude-sonnet-5-5": {
+      "json": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.16579079999999996,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "toon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.11969670000000002,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.1178325,
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      }
+    }
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "users": {
+        "json": {
+          "raw": 4295,
+          "prompt": 4312
+        },
+        "toon": {
+          "raw": 2510,
+          "prompt": 2541
+        },
+        "lwon": {
+          "raw": 2503,
+          "prompt": 2811
+        }
+      },
+      "orders": {
+        "json": {
+          "raw": 8259,
+          "prompt": 8276
+        },
+        "toon": {
+          "raw": 7435,
+          "prompt": 7466
+        },
+        "lwon": {
+          "raw": 4808,
+          "prompt": 5116
+        }
+      },
+      "issues": {
+        "json": {
+          "raw": 4378,
+          "prompt": 4395
+        },
+        "toon": {
+          "raw": 4414,
+          "prompt": 4445
+        },
+        "lwon": {
+          "raw": 2760,
+          "prompt": 3068
+        }
+      },
+      "menu": {
+        "json": {
+          "raw": 562,
+          "prompt": 579
+        },
+        "toon": {
+          "raw": 578,
+          "prompt": 609
+        },
+        "lwon": {
+          "raw": 362,
+          "prompt": 670
+        }
+      },
+      "logs": {
+        "json": {
+          "raw": 4393,
+          "prompt": 4410
+        },
+        "toon": {
+          "raw": 4472,
+          "prompt": 4503
+        },
+        "lwon": {
+          "raw": 3222,
+          "prompt": 3530
+        }
+      },
+      "search": {
+        "json": {
+          "raw": 2930,
+          "prompt": 2947
+        },
+        "toon": {
+          "raw": 2200,
+          "prompt": 2231
+        },
+        "lwon": {
+          "raw": 2298,
+          "prompt": 2606
+        }
+      }
+    },
+    "claude-sonnet-5-5": {
+      "users": {
+        "json": {
+          "raw": 4295,
+          "prompt": 4312
+        },
+        "toon": {
+          "raw": 2510,
+          "prompt": 2541
+        },
+        "lwon": {
+          "raw": 2503,
+          "prompt": 2811
+        }
+      },
+      "orders": {
+        "json": {
+          "raw": 8259,
+          "prompt": 8276
+        },
+        "toon": {
+          "raw": 7435,
+          "prompt": 7466
+        },
+        "lwon": {
+          "raw": 4808,
+          "prompt": 5116
+        }
+      },
+      "issues": {
+        "json": {
+          "raw": 4378,
+          "prompt": 4395
+        },
+        "toon": {
+          "raw": 4414,
+          "prompt": 4445
+        },
+        "lwon": {
+          "raw": 2760,
+          "prompt": 3068
+        }
+      },
+      "menu": {
+        "json": {
+          "raw": 562,
+          "prompt": 579
+        },
+        "toon": {
+          "raw": 578,
+          "prompt": 609
+        },
+        "lwon": {
+          "raw": 362,
+          "prompt": 670
+        }
+      },
+      "logs": {
+        "json": {
+          "raw": 4393,
+          "prompt": 4410
+        },
+        "toon": {
+          "raw": 4472,
+          "prompt": 4503
+        },
+        "lwon": {
+          "raw": 3222,
+          "prompt": 3530
+        }
+      },
+      "search": {
+        "json": {
+          "raw": 2930,
+          "prompt": 2947
+        },
+        "toon": {
+          "raw": 2200,
+          "prompt": 2231
+        },
+        "lwon": {
+          "raw": 2298,
+          "prompt": 2606
+        }
+      }
+    },
+    "claude-opus-5-5": {
+      "users": {
+        "json": {
+          "raw": 4295,
+          "prompt": 4312
+        },
+        "toon": {
+          "raw": 2510,
+          "prompt": 2541
+        },
+        "lwon": {
+          "raw": 2503,
+          "prompt": 2811
+        }
+      },
+      "orders": {
+        "json": {
+          "raw": 8259,
+          "prompt": 8276
+        },
+        "toon": {
+          "raw": 7435,
+          "prompt": 7466
+        },
+        "lwon": {
+          "raw": 4808,
+          "prompt": 5116
+        }
+      },
+      "issues": {
+        "json": {
+          "raw": 4378,
+          "prompt": 4395
+        },
+        "toon": {
+          "raw": 4414,
+          "prompt": 4445
+        },
+        "lwon": {
+          "raw": 2760,
+          "prompt": 3068
+        }
+      },
+      "menu": {
+        "json": {
+          "raw": 562,
+          "prompt": 579
+        },
+        "toon": {
+          "raw": 578,
+          "prompt": 609
+        },
+        "lwon": {
+          "raw": 362,
+          "prompt": 670
+        }
+      },
+      "logs": {
+        "json": {
+          "raw": 4393,
+          "prompt": 4410
+        },
+        "toon": {
+          "raw": 4472,
+          "prompt": 4503
+        },
+        "lwon": {
+          "raw": 3222,
+          "prompt": 3530
+        }
+      },
+      "search": {
+        "json": {
+          "raw": 2930,
+          "prompt": 2947
+        },
+        "toon": {
+          "raw": 2200,
+          "prompt": 2231
+        },
+        "lwon": {
+          "raw": 2298,
+          "prompt": 2606
+        }
+      }
+    }
+  }
+}

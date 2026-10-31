@@ -2,13 +2,19 @@
   "name": "lwon-monorepo",
   "private": true,
   "type": "module",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "build": "npm run build --workspaces",
     "test": "npm test --workspaces",
-    "bench": "node bench/bench.ts"
+    "bench": "node bench/bench.ts",
+    "eval": "node bench/eval/eval.ts",
+    "eval:tokens": "node bench/eval/tokens.ts",
+    "eval:report": "node bench/eval/report.ts"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.134.0",
     "@toon-format/toon": "4.4.0",
     "@types/node": "24.10.1",
     "gpt-tokenizer": "2.8.1",
