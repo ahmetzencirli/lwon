@@ -2,21 +2,51 @@
   "name": "lwon",
   "version": "1.0.0-beta.1",
   "description": "Lightweight Object Notation: JSON with the keys written once. Lossless, two-way, built to save LLM tokens.",
-  "keywords": ["json", "serialization", "llm", "tokens", "compression", "format"],
+  "keywords": [
+    "json",
+    "serialization",
+    "llm",
+    "tokens",
+    "compression",
+    "format"
+  ],
   "author": "Ahmet Zencirli",
   "license": "Apache-2.0",
-  "repository": { "type": "git", "url": "git+https://github.com/ahmetzencirli/lwon.git", "directory": "packages/lwon" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmetzencirli/lwon.git",
+    "directory": "packages/lwon"
+  },
   "type": "module",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
-  "bin": { "lwon": "./dist/cli.js" },
-  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
-  "engines": { "node": ">=20" },
+  "bin": {
+    "lwon": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "node --test test/*.test.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "smoke": "node test/dist-smoke.mjs",
+    "prepublishOnly": "npm run build && npm test && npm run smoke"
+  },
+  "homepage": "https://ahmetzencirli.github.io/lwon-studio/",
+  "bugs": {
+    "url": "https://github.com/ahmetzencirli/lwon/issues"
   }
 }
