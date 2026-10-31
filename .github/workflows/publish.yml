@@ -43,7 +43,7 @@ jobs:
           version=$(node -p "require('./packages/lwon/package.json').version")
           tag=latest
           if [[ "$version" == *-* ]]; then
-            stable=$(npm view lwon versions --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const v=s?[].concat(JSON.parse(s)):[];console.log(v.some(x=>!x.includes("-"))?"yes":"no")})')
+            stable=$(npm view lwon versions --json 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{let v=[];try{v=[].concat(JSON.parse(s)).filter(x=>typeof x==="string")}catch{}console.log(v.some(x=>!x.includes("-"))?"yes":"no")})')
             [ "$stable" = yes ] && tag=beta
           fi
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
