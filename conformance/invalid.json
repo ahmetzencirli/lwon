@@ -14,5 +14,9 @@
   {"name": "trailing content", "lwon": "a\n[[1]] extra"},
   {"name": "trailing content after any root", "lwon": "*\n1 2"},
   {"name": "unexpected character in header", "lwon": "a % b\n[]"},
-  {"name": "unclosed object header", "lwon": "{a b\n[1 2]"}
+  {"name": "unclosed object header", "lwon": "{a b\n[1 2]"},
+  {"name": "keyed marker not last", "lwon": "a * b\n[]"},
+  {"name": "keyed slot is not an object", "lwon": "a *\n[[1 2]]"},
+  {"name": "keyed slot repeats a header key", "lwon": "a *\n[[1 {\"a\":2}]]"},
+  {"name": "value after the keyed slot", "lwon": "a *\n[[1 {\"b\":2} 3]]"}
 ]

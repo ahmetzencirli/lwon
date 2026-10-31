@@ -16,5 +16,8 @@
   {"name": "any root bare word", "lwon": "*\nhello", "json": "hello"},
   {"name": "space separates fields", "lwon": "a [b]\n[[1 [2]]]", "json": [{"a": 1, "b": [2]}]},
   {"name": "empty table", "lwon": "a\n[]", "json": []},
-  {"name": "unicode bare words", "lwon": "city\n[[İstanbul] [東京]]", "json": [{"city": "İstanbul"}, {"city": "東京"}]}
+  {"name": "unicode bare words", "lwon": "city\n[[İstanbul] [東京]]", "json": [{"city": "İstanbul"}, {"city": "東京"}]},
+  {"name": "keyed slot", "lwon": "id level *\n[\n[1 info {\"userId\":7}]\n[2 warn]\n[3 error {\"retry\":2,\"tags\":[]}]\n]", "json": [{"id": 1, "level": "info", "userId": 7}, {"id": 2, "level": "warn"}, {"id": 3, "level": "error", "retry": 2, "tags": []}]},
+  {"name": "keyed slot after absent fields", "lwon": "a b *\n[[1 ~ {\"c\":null}]]", "json": [{"a": 1, "c": null}]},
+  {"name": "keyed slot in a nested shape", "lwon": "id [items[sku *]]\n[[1 [[A {\"gift\":true}] [B]]]]", "json": [{"id": 1, "items": [{"sku": "A", "gift": true}, {"sku": "B"}]}]}
 ]

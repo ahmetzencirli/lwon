@@ -52,6 +52,31 @@
         }
       },
       "lwon": {
+        "correct": 63,
+        "total": 66,
+        "errors": 0,
+        "cost": 0.03223322000000001,
+        "missed": [
+          "sparse-4",
+          "sparse-5",
+          "sparse-8"
+        ],
+        "byKind": {
+          "count": [
+            27,
+            30
+          ],
+          "aggregate": [
+            3,
+            3
+          ],
+          "absent": [
+            33,
+            33
+          ]
+        }
+      },
+      "lwon-positional": {
         "correct": 62,
         "total": 66,
         "errors": 0,
@@ -65,6 +90,30 @@
         "byKind": {
           "count": [
             26,
+            30
+          ],
+          "aggregate": [
+            3,
+            3
+          ],
+          "absent": [
+            33,
+            33
+          ]
+        }
+      },
+      "lwon-p2": {
+        "correct": 63,
+        "total": 66,
+        "errors": 0,
+        "cost": 0.0948492,
+        "missed": [
+          "sparse-1",
+          "sparse-9"
+        ],
+        "byKind": {
+          "count": [
+            27,
             30
           ],
           "aggregate": [
@@ -129,6 +178,33 @@
         }
       },
       "lwon": {
+        "correct": 60,
+        "total": 66,
+        "errors": 0,
+        "cost": 0.030485860000000004,
+        "missed": [
+          "sparse-3",
+          "sparse-4",
+          "sparse-5",
+          "sparse-6",
+          "sparse-8"
+        ],
+        "byKind": {
+          "count": [
+            24,
+            30
+          ],
+          "aggregate": [
+            3,
+            3
+          ],
+          "absent": [
+            33,
+            33
+          ]
+        }
+      },
+      "lwon-positional": {
         "correct": 62,
         "total": 66,
         "errors": 0,
@@ -201,6 +277,30 @@
         }
       },
       "lwon": {
+        "correct": 42,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.3243200000000001,
+        "missed": [
+          "sparse-6",
+          "sparse-11"
+        ],
+        "byKind": {
+          "count": [
+            19,
+            20
+          ],
+          "aggregate": [
+            1,
+            2
+          ],
+          "absent": [
+            22,
+            22
+          ]
+        }
+      },
+      "lwon-positional": {
         "correct": 44,
         "total": 44,
         "errors": 0,
@@ -236,9 +336,19 @@
         "cached": 0.0004376660606060606
       },
       "lwon": {
+        "output": 720.7575757575758,
+        "once": 0.0012858787878787879,
+        "cached": 0.0004529287878787879
+      },
+      "lwon-positional": {
         "output": 2498.939393939394,
         "once": 0.002006169696969697,
         "cached": 0.0013251396969696972
+      },
+      "lwon-p2": {
+        "output": 2663.1969696969695,
+        "once": 0.0020902984848484847,
+        "cached": 0.001407468484848485
       }
     },
     "claude-haiku-5-5 (effort low)": {
@@ -253,6 +363,11 @@
         "cached": 0.0003789539393939394
       },
       "lwon": {
+        "output": 603.560606060606,
+        "once": 0.001227280303030303,
+        "cached": 0.000394330303030303
+      },
+      "lwon-positional": {
         "output": 2175.060606060606,
         "once": 0.001844230303030303,
         "cached": 0.001163200303030303
@@ -270,6 +385,11 @@
         "cached": 0.004860972727272727
       },
       "lwon": {
+        "output": 352.59090909090907,
+        "once": 0.022035909090909092,
+        "cached": 0.00537690909090909
+      },
+      "lwon-positional": {
         "output": 545.0681818181819,
         "once": 0.02058468181818182,
         "cached": 0.00696408181818182
@@ -277,6 +397,30 @@
     }
   },
   "tokens": {
+    "claude-haiku-5-5": {
+      "sparse": {
+        "json": {
+          "raw": 10922,
+          "prompt": 10939
+        },
+        "toon": {
+          "raw": 11433,
+          "prompt": 11464
+        },
+        "lwon": {
+          "raw": 8835,
+          "prompt": 9163
+        },
+        "lwon-positional": {
+          "raw": 7167,
+          "prompt": 7475
+        },
+        "lwon-p2": {
+          "raw": 7167,
+          "prompt": 7495
+        }
+      }
+    },
     "claude-sonnet-5-5": {
       "sparse": {
         "json": {
@@ -288,8 +432,40 @@
           "prompt": 11464
         },
         "lwon": {
+          "raw": 8835,
+          "prompt": 9163
+        },
+        "lwon-positional": {
           "raw": 7167,
           "prompt": 7475
+        },
+        "lwon-p2": {
+          "raw": 7167,
+          "prompt": 7495
+        }
+      }
+    },
+    "claude-opus-5-5": {
+      "sparse": {
+        "json": {
+          "raw": 10922,
+          "prompt": 10939
+        },
+        "toon": {
+          "raw": 11433,
+          "prompt": 11464
+        },
+        "lwon": {
+          "raw": 8835,
+          "prompt": 9163
+        },
+        "lwon-positional": {
+          "raw": 7167,
+          "prompt": 7475
+        },
+        "lwon-p2": {
+          "raw": 7167,
+          "prompt": 7495
         }
       }
     }

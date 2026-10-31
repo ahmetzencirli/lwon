@@ -53,6 +53,10 @@ A header is a space-separated list of fields. Each field has a **key** and a
 The `[` that opens inner fields MUST follow the key with no whitespace between
 them: `a[b]` is one object field, `a [b]` is two fields.
 
+A field list MAY end with `*`, the **keyed slot**: the objects at that position
+may have keys besides the listed fields, and each record carries them by name
+(§3.3). `*` needs at least one field before it and must come last.
+
 ### 2.1 Keys
 
 A key is written bare when it matches `[\p{L}\p{N}_$][\p{L}\p{N}_$.\-]*`.
@@ -123,6 +127,20 @@ A record is `[` followed by one value per field, in header order, then `]`.
 * `null` marks a key that is present with the value `null`.
 * A record MAY stop early: fields after its last value are absent.
 * A record MUST NOT have more values than fields.
+* When the field list ends in `*`, a record has one more slot after the
+  fields: `~` (or nothing, at the end) when the object has no other keys, or a
+  JSON object holding those keys and their values. A key in that object MUST
+  NOT also be a listed field.
+
+```
+id level userId *
+[
+[1 info 7]
+[2 warn ~ {"retry":2,"region":null}]
+]
+```
+
+is `[{"id":1,"level":"info","userId":7},{"id":2,"level":"warn","retry":2,"region":null}]`.
 
 `~` is valid only directly inside a record.
 
@@ -158,7 +176,7 @@ reads numbers the way its platform's JSON parser does.
 ```
 document  = ws header ws body ws
 header    = "*" / "{" fields "}" / fields          ; ends at a depth-0 line break
-fields    = *( ws field ) ws
+fields    = *( ws field ) [ ws "*" ] ws             ; "*" only after a field
 field     = key [ "[" sub "]" ]                    ; no space before "["
           / "[" key [ "[" sub "]" ] "]"
           / "[" ref "]"
@@ -168,7 +186,7 @@ key       = bare-key / json-string
 
 table-body  = "[" *( ws row ) ws "]"
 row         = record / primitive / json-object
-record      = "[" *( ws ( value / "~" ) ) ws "]"
+record      = "[" *( ws ( value / "~" ) ) [ ws json-object ] ws "]"   ; object only in the "*" slot
 value       = depends on field kind (§3.2)
 ```
 
@@ -184,8 +202,12 @@ The format allows many encodings of the same data. The reference encoder:
    would cost more than repeating keys (fewer than 30% of slots filled).
 4. Uses a reference instead of a new type when the objects' keys are a subset of
    an enclosing type's keys, missing at most one, and every value fits.
-5. Writes a value as embedded JSON only when it does not fit the header.
-6. Omits trailing `~` in records and quotes only strings that are not bare words.
+5. Moves keys that appear in fewer than half of the objects at a position to the
+   `*` slot. Language models match values to fields by position with more
+   reasoning, and rows full of `~` cost them the most; named sparse keys cut
+   that reasoning to close to what JSON needs (see `bench/eval`).
+6. Writes a value as embedded JSON only when it does not fit the header.
+7. Omits trailing `~` in records and quotes only strings that are not bare words.
 
 ## 7. Changes from the 0.x draft
 
@@ -194,5 +216,6 @@ The format allows many encodings of the same data. The reference encoder:
 * Strings use JSON escapes; bare words need no quotes.
 * Values that do not fit the header are written as embedded JSON.
 * `{fields}` and `*` headers cover root objects and any other root value.
+* A field list may end in `*`, the keyed slot for keys most objects lack.
 * The root wrapper form `[menu[… [submenu[@menu]]]]` is removed; use
   `title link [submenu[@]]`.

@@ -2,7 +2,7 @@
   {"name":"flat table","json":[{"id":1,"name":"Alice","role":"admin"},{"id":2,"name":"Bob","role":"user"}],"lwon":"id name role\n[\n[1 Alice admin]\n[2 Bob user]\n]"},
   {"name":"string escapes","json":[{"s":"say \"hi\"\nnew\\line\ttab \u0001  "}],"lwon":"s\n[\n[\"say \\\"hi\\\"\\nnew\\\\line\\ttab \\u0001  \"]\n]"},
   {"name":"null, empty array, empty object, empty string","json":[{"a":null,"b":[],"c":{},"d":""}],"lwon":"a [b] c d\n[\n[null [] {} \"\"]\n]"},
-  {"name":"absent keys","json":[{"a":1},{"b":2},{"a":3,"c":4}],"lwon":"a b c\n[\n[1]\n[~ 2]\n[3 ~ 4]\n]"},
+  {"name":"absent keys","json":[{"a":1},{"b":2},{"a":3,"c":4}],"lwon":"a *\n[\n[1]\n[~ {\"b\":2}]\n[3 {\"c\":4}]\n]"},
   {"name":"absent vs null","json":[{"a":1,"b":null},{"a":2}],"lwon":"a b\n[\n[1 null]\n[2]\n]"},
   {"name":"field that is sometimes an object","json":[{"id":1,"x":"str"},{"id":2,"x":{"deep":1}},{"id":3,"x":null}],"lwon":"id x[deep]\n[\n[1 str]\n[2 [1]]\n[3 null]\n]"},
   {"name":"field that is an object or an array","json":[{"x":{"a":1}},{"x":[1,2]}],"lwon":"x\n[\n[{\"a\":1}]\n[[1,2]]\n]"},

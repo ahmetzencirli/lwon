@@ -12,6 +12,7 @@ for (const c of load('roundtrip.json')) {
     const text = encode(c.json);
     assert.deepEqual(canonical(decode(text)), canonical(c.json), text);
     assert.deepEqual(canonical(decode(encode(c.json, { bareStrings: false }))), canonical(c.json));
+    assert.deepEqual(canonical(decode(encode(c.json, { keyedBelow: 0 }))), canonical(c.json));
   });
 }
 

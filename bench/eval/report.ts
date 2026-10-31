@@ -2,7 +2,7 @@
 // (EVAL-sparse.md and results-sparse.json for the sparse suite).
 //   node bench/eval/report.ts [--suite sparse] [--dry]
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { costOf, FORMATS, PRICE, SUITES, type Format, type Record_, type Suite } from './eval.ts';
+import { costOf, FORMATS, PRICE, SUITES, VARIANTS, type Format, type Record_, type Suite } from './eval.ts';
 
 const argv = process.argv.slice(2);
 const dry = argv.includes('--dry');
@@ -35,6 +35,8 @@ const records_ = records as (Record_ & { label: string })[];
 const models = [...new Set(records_.map((r) => r.label))].sort();
 const kinds = [...new Set(questions.map((q) => q.kind))];
 const trials = Math.max(1, ...records.map((r) => (r.trial ?? 0) + 1));
+/** The three main formats, then any experimental variants that were run. */
+const formats: Format[] = [...FORMATS, ...VARIANTS.filter((v) => records.some((r) => r.format === v))];
 const pct = (a: number, b: number) => (b ? `${Math.round((a / b) * 100)}%` : '–');
 
 const cost = (rs: Record_[]) => rs.reduce((s, r) => s + costOf(r), 0);
@@ -51,14 +53,15 @@ lines.push(
   '## Accuracy',
   '',
   ...(trials > 1 ? ['Correct answers over all trials; in brackets, the questions answered wrong at least once.', ''] : []),
-  `| Model | ${FORMATS.map((f) => f.toUpperCase()).join(' | ')} |`,
-  `|---|${FORMATS.map(() => '--:').join('|')}|`,
+  `| Model | ${formats.map((f) => f.toUpperCase()).join(' | ')} |`,
+  `|---|${formats.map(() => '--:').join('|')}|`,
 );
 const summary: Record<string, Record<Format, { correct: number; total: number; errors: number; cost: number; missed: string[]; byKind: Record<string, [number, number]> }>> = {};
 for (const m of models) {
   summary[m] = {} as (typeof summary)[string];
-  const cells = FORMATS.map((f) => {
+  const cells = formats.map((f) => {
     const rs = records_.filter((r) => r.label === m && r.format === f);
+    if (!rs.length) return '–';
     const ok = rs.filter((r) => r.correct).length;
     const byKind = Object.fromEntries(kinds.map((k) => {
       const kr = rs.filter((r) => r.kind === k);
@@ -73,9 +76,10 @@ for (const m of models) {
 
 lines.push('', '## Accuracy by question kind', '');
 for (const m of models) {
-  lines.push(`**${m}**`, '', `| Kind | ${FORMATS.map((f) => f.toUpperCase()).join(' | ')} |`, `|---|${FORMATS.map(() => '--:').join('|')}|`);
+  const ran = formats.filter((f) => summary[m][f]);
+  lines.push(`**${m}**`, '', `| Kind | ${ran.map((f) => f.toUpperCase()).join(' | ')} |`, `|---|${ran.map(() => '--:').join('|')}|`);
   for (const k of kinds) {
-    lines.push(`| ${k} | ${FORMATS.map((f) => { const [a, b] = summary[m][f].byKind[k]; return `${a}/${b}`; }).join(' | ')} |`);
+    lines.push(`| ${k} | ${ran.map((f) => { const [a, b] = summary[m][f].byKind[k]; return `${a}/${b}`; }).join(' | ')} |`);
   }
   lines.push('');
 }
@@ -86,27 +90,31 @@ for (const m of models) {
 const costRows = models.map((m) => {
   const model = records_.find((r) => r.label === m)!.model;
   const p = PRICE[model] ?? [0, 0, 0, 0];
-  const per = Object.fromEntries(FORMATS.map((f) => {
+  const per = Object.fromEntries(formats.filter((f) => summary[m][f]).map((f) => {
     const rs = records_.filter((r) => r.label === m && r.format === f && !r.error);
     const avg = (fn: (r: Record_) => number) => rs.reduce((s, r) => s + fn(r), 0) / (rs.length || 1);
     const input = avg((r) => r.usage.input + r.usage.cacheRead + r.usage.cacheWrite);
     const output = avg((r) => r.usage.output);
     return [f, { output, once: (input * p[0] + output * p[1]) / 1e6, cached: (input * p[2] + output * p[1]) / 1e6 }];
-  })) as Record<Format, { output: number; once: number; cached: number }>;
+  })) as Partial<Record<Format, { output: number; once: number; cached: number }>>;
   return { m, per };
 });
 const vs = (a: number, b: number) => { const d = Math.round((a / b - 1) * 100); return d > 0 ? `+${d}%` : `${d}%`; };
+const others = formats.filter((f) => f !== 'json');
 lines.push('## Output tokens and cost per question', '',
   'Average output tokens (including thinking), and the full cost of one question compared with JSON:',
-  '"sent once" prices the data as normal input, "cached" as a cache read when the same data answers many questions.', '',
-  '| Model | Output JSON | TOON | LWON | TOON sent once | LWON sent once | TOON cached | LWON cached |',
-  '|---|--:|--:|--:|--:|--:|--:|--:|');
+  '"once" prices the data as normal input, "cached" as a cache read when the same data answers many questions.', '',
+  `| Model | ${formats.map((f) => `Output ${f.toUpperCase()}`).join(' | ')} | ${others.map((f) => `${f.toUpperCase()} once | ${f.toUpperCase()} cached`).join(' | ')} |`,
+  `|---|${formats.map(() => '--:').join('|')}|${others.map(() => '--:|--:').join('|')}|`);
 for (const { m, per } of costRows) {
-  lines.push(`| ${m} | ${Math.round(per.json.output)} | ${Math.round(per.toon.output)} | ${Math.round(per.lwon.output)} | ${vs(per.toon.once, per.json.once)} | ${vs(per.lwon.once, per.json.once)} | ${vs(per.toon.cached, per.json.cached)} | ${vs(per.lwon.cached, per.json.cached)} |`);
+  const j = per.json!;
+  const out = formats.map((f) => (per[f] ? String(Math.round(per[f]!.output)) : '–'));
+  const rel = others.map((f) => (per[f] ? `${vs(per[f]!.once, j.once)} | ${vs(per[f]!.cached, j.cached)}` : '– | –'));
+  lines.push(`| ${m} | ${out.join(' | ')} | ${rel.join(' | ')} |`);
 }
 lines.push('');
 
-const misses = models.flatMap((m) => FORMATS.flatMap((f) =>
+const misses = models.flatMap((m) => formats.flatMap((f) =>
   records_.filter((r) => r.label === m && r.format === f && !r.correct).map((r) => ({ m, f, r }))));
 if (misses.length) {
   lines.push('## Wrong answers', '', '| Model | Format | Question | Expected | Got |', '|---|---|---|---|---|');
@@ -138,8 +146,8 @@ for (const { models: ms, data } of groups.values()) {
 }
 
 if (!dry) {
-  lines.push('## Cost of this run', '', '| Model | ' + FORMATS.join(' | ') + ' |', `|---|${FORMATS.map(() => '--:').join('|')}|`);
-  for (const m of models) lines.push(`| ${m} | ${FORMATS.map((f) => `$${summary[m][f].cost.toFixed(3)}`).join(' | ')} |`);
+  lines.push('## Cost of this run', '', '| Model | ' + formats.join(' | ') + ' |', `|---|${formats.map(() => '--:').join('|')}|`);
+  for (const m of models) lines.push(`| ${m} | ${formats.map((f) => (summary[m][f] ? `$${summary[m][f].cost.toFixed(3)}` : '–')).join(' | ')} |`);
 }
 
 const md = lines.join('\n') + '\n';

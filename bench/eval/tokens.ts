@@ -8,7 +8,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { encode as o200k } from 'gpt-tokenizer';
 import { encode as toToon } from '@toon-format/toon';
 import { encode as toLwon } from '../../packages/lwon/src/index.ts';
-import { dataBlock, DEFAULT_MODELS, FORMATS, loadDataset, type Format } from './eval.ts';
+import { dataBlock, DEFAULT_MODELS, FORMATS, loadDataset, VARIANTS, type Format } from './eval.ts';
 
 const a = process.argv.slice(2);
 const val = (k: string) => (a.includes(k) ? a[a.indexOf(k) + 1] : undefined);
@@ -18,7 +18,8 @@ const DATASETS = suite === 'basic' ? ['users', 'orders', 'issues', 'menu', 'logs
 const models = dry ? ['o200k'] : (val('--models')?.split(',') ?? DEFAULT_MODELS);
 
 const raw = (format: Format, data: unknown) =>
-  format === 'json' ? JSON.stringify(data) : format === 'toon' ? toToon(data) : toLwon(data);
+  format === 'json' ? JSON.stringify(data) : format === 'toon' ? toToon(data)
+    : toLwon(data, format === 'lwon' ? {} : { keyedBelow: 0 });
 
 const client = dry ? null : new Anthropic({ maxRetries: 6 });
 async function count(model: string, text: string): Promise<number> {
@@ -35,7 +36,7 @@ for (const model of models) {
   for (const name of DATASETS) {
     const data = loadDataset(name);
     out[model][name] = {} as Record<Format, { raw: number; prompt: number }>;
-    for (const f of FORMATS) {
+    for (const f of [...FORMATS, ...VARIANTS]) {
       out[model][name][f] = {
         raw: (await count(model, raw(f, data))) - overhead,
         prompt: (await count(model, dataBlock(f, data))) - overhead,

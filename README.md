@@ -2,7 +2,7 @@
 
 LWON is JSON with the keys written once. A header names the fields; the body
 holds only the values, by position. Any JSON value converts to LWON and back
-without loss, and the result is 22–42% fewer Claude tokens than minified JSON
+without loss, and the result is 21–42% fewer Claude tokens than minified JSON
 on typical API and tool data, with no loss of accuracy in our tests.
 
 ```
@@ -32,7 +32,7 @@ data, where table formats fall back to verbose layouts.
 | Nested orders | 8259 | 7435 | **4808** |
 | GitHub-style issues | 4378 | 4414 | **2760** |
 | Recursive menu | 562 | 578 | **362** |
-| Logs with optional fields | 4393 | 4472 | **3222** |
+| Logs with optional fields | 4393 | 4472 | **3452** |
 | Search tool result | 2930 | **2200** | 2298 |
 
 Claude tokens (Haiku, Sonnet and Opus 5.5 share a tokenizer), counted with the
@@ -40,20 +40,18 @@ Claude tokens (Haiku, Sonnet and Opus 5.5 share a tokenizer), counted with the
 
 **Accuracy.** Claude Haiku 5.5, Sonnet 5.5 and Opus 5.5 answered 44 questions
 about this data (lookups, counts, nested fields, trees, absent versus null) in
-each format. At medium effort every model answered every question correctly in
-JSON, TOON and LWON ([bench/eval/EVAL.md](bench/eval/EVAL.md)). On a harder,
-sparse dataset where most fields are optional, LWON scored like JSON: 94% versus
-92–95% for Haiku and 44/44 versus 43/44 for Sonnet; every miss in every format
-was a count over 150 rows that was off by one or two
-([bench/eval/EVAL-sparse.md](bench/eval/EVAL-sparse.md)).
+each format, and every model got every question right in JSON, TOON and LWON
+([bench/eval/EVAL.md](bench/eval/EVAL.md)). On a harder set of 150 sparse log
+events, LWON missed 11 of 176 answers and JSON 9, all counts over many rows off
+by one to three, or a sum ([bench/eval/EVAL-sparse.md](bench/eval/EVAL-sparse.md)).
 
-**The catch: models think longer about LWON.** Mapping values to fields by
-position costs output tokens, which are priced higher than input. On regular
-data, sent once, a question still costs 18–24% less with LWON than with JSON.
-When the same data is cached and reused, the saving disappears. On sparse data,
-counting questions take Sonnet twice and Haiku four times the output tokens, so
-LWON costs more there. Use LWON for large, regular payloads read once; reducing
-this reasoning overhead is the next piece of work.
+**Cost per question.** Models also think about the data, and output tokens cost
+more than input. Counting everything, a question on the regular data cost 21–25%
+less with LWON than with JSON when the data is sent once, and 2–15% less when it
+is cached. On the sparse data it cost 9–11% less sent once and 6–9% more cached.
+LWON 0.x, which wrote every key by position, made models count positions through
+rows full of `~` and cost up to three times as much there; writing rare keys by
+name in a `*` slot fixed that.
 
 ## Use it
 
@@ -111,9 +109,8 @@ npm run eval:report -- --suite sparse
 ## Status
 
 1.0 beta. The format is stable enough to try; it may still change before 1.0.
-Planned: cutting the reasoning overhead on sparse data (primer and encoder
-changes, measured with the eval), an MCP proxy that converts any MCP server's
-tool results to LWON, and ports to Python and Go.
+Planned: an MCP proxy that converts any MCP server's tool results to LWON, and
+ports to Python and Go.
 
 ## License
 

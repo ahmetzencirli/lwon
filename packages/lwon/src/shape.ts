@@ -14,6 +14,8 @@ export interface Shape {
   name: string;
   keys: string[];
   fields: Field[];
+  /** Header ends in `*`: each record may end with a JSON object of keys not in `fields`. */
+  rest?: boolean;
 }
 
 export type Header =
@@ -57,12 +59,14 @@ export function makeShape(name: string, fields: Field[]): Shape {
 
 export function writeHeader(header: Header): string {
   if (header.root === 'any') return '*';
-  const fields = writeFields(header.shape.fields, [header.shape]);
+  const fields = writeFields(header.shape, [header.shape]);
   return header.root === 'object' ? `{${fields}}` : fields;
 }
 
-function writeFields(fields: Field[], stack: Shape[]): string {
-  return fields.map((f) => writeField(f, stack)).join(' ');
+function writeFields(shape: Shape, stack: Shape[]): string {
+  const fields = shape.fields.map((f) => writeField(f, stack));
+  if (shape.rest) fields.push('*');
+  return fields.join(' ');
 }
 
 function writeField(f: Field, stack: Shape[]): string {
@@ -75,7 +79,7 @@ function writeField(f: Field, stack: Shape[]): string {
   if (isRef && shape !== stack[0] && f.kind === 'rows' && shape.name === f.key) return `[@${key}]`;
   const inner = isRef
     ? shape === stack[0] ? '@' : `@${shape.name}`
-    : writeFields(shape.fields, [...stack, shape]);
+    : writeFields(shape, [...stack, shape]);
   return f.kind === 'object' ? `${key}[${inner}]` : `[${key}[${inner}]]`;
 }
 
@@ -209,6 +213,10 @@ export function readHeader(src: string): { header: Header; end: number } {
         } else {
           fail("Expected a key after '['");
         }
+      } else if (tok.t === '*' && shape.fields.length > 0) {
+        p++;
+        if (p < tokens.length && tokens[p].t !== closer) fail("'*' must be the last field");
+        shape.rest = true;
       } else {
         fail(`Unexpected '${tok.t === 'ref' ? '@' + tok.value : tok.t}' in header`);
       }

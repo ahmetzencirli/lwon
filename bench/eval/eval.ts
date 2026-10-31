@@ -18,7 +18,24 @@ import { buildQuestions, extractAnswer, isCorrect, type Question } from './quest
 import { buildSparseQuestions, sparseData } from './sparse.ts';
 
 export const FORMATS = ['json', 'toon', 'lwon'] as const;
-export type Format = (typeof FORMATS)[number];
+/**
+ * Earlier LWON settings, kept to compare against: `lwon-positional` is the 0.x default
+ * (every key positional, first primer); `lwon-p2` is positional with the current primer.
+ * `lwon` itself is the library default: sparse keys in the `*` slot, current primer.
+ */
+export const VARIANTS = ['lwon-positional', 'lwon-p2'] as const;
+
+/** The first primer, used for `lwon-positional`. */
+export const PRIMER_V1 = `Data below is in LWON, a compact form of JSON. Line 1 is a header naming the fields; the rest holds only values, matched to fields by position.
+- Header \`a b\`: a list of objects, one row \`[...]\` per object. \`{a b}\`: a single object. \`*\`: plain JSON follows.
+- \`k[x y]\` is an object with fields x, y. \`[k]\` is an array of values. \`[k[x y]]\` is an array of objects with fields x, y.
+- \`@\` means "same fields as the top level"; \`@k\` means "same fields as the enclosing k". \`[@k]\` means \`[k[@k]]\`.
+- \`~\` means the key is absent; a row that ends early leaves its remaining keys absent. \`null\`, \`[]\`, \`{}\` mean what they do in JSON.
+- Unquoted words are strings. A value written as JSON (\`{...}\` or, in a plain field, \`[...]\`) is taken as that JSON.`;
+export type Format = (typeof FORMATS)[number] | (typeof VARIANTS)[number];
+
+/** Primer v2: spells out reading by position, and covers the experimental `*` slot. */
+
 export const DEFAULT_MODELS = ['claude-haiku-5-5', 'claude-sonnet-5-5', 'claude-opus-5-5'];
 
 /** USD per million tokens: input, output, cache read, cache write (5 min). */
@@ -40,6 +57,8 @@ const SYSTEM =
 export function dataBlock(format: Format, data: unknown): string {
   if (format === 'json') return `The data below is JSON.\n\n<data>\n${JSON.stringify(data)}\n</data>`;
   if (format === 'toon') return `The data below is in TOON (Token-Oriented Object Notation).\n\n<data>\n${toToon(data)}\n</data>`;
+  if (format === 'lwon-positional') return `${PRIMER_V1}\n\n<data>\n${toLwon(data, { keyedBelow: 0 })}\n</data>`;
+  if (format === 'lwon-p2') return `${PRIMER}\n\n<data>\n${toLwon(data, { keyedBelow: 0 })}\n</data>`;
   return `${PRIMER}\n\n<data>\n${toLwon(data)}\n</data>`;
 }
 

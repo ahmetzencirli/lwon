@@ -81,14 +81,24 @@ class Reader {
     let n = 0;
     while (this.ws() !== ']') {
       if (this.i >= this.src.length) this.fail("Expected ']' to close the record", start);
-      if (n >= shape.fields.length) {
-        this.fail(`Record has more values than the ${shape.fields.length} fields in its header`);
-      }
-      const f = shape.fields[n++];
+      const slots = shape.fields.length + (shape.rest ? 1 : 0);
+      if (n >= slots) this.fail(`Record has more values than the ${slots} fields in its header`);
       if (this.src[this.i] === '~' && this.atDelimiter(this.i + 1)) {
         this.i++;
+        n++;
         continue;
       }
+      if (n++ === shape.fields.length) {
+        // The `*` slot: an object of the keys the header does not list.
+        const at = this.i;
+        if (this.src[at] !== '{') this.fail("Expected a JSON object in the '*' slot");
+        for (const [k, v] of Object.entries(this.json() as { [key: string]: Json })) {
+          if (shape.keys.includes(k)) this.fail(`Key ${JSON.stringify(k)} in the '*' slot is also in the header`, at);
+          setKey(obj, k, v);
+        }
+        continue;
+      }
+      const f = shape.fields[n - 1];
       setKey(obj, f.key, this.value(f.kind, f.shape));
     }
     this.i++;

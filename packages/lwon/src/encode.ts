@@ -4,6 +4,13 @@ import type { Json } from './decode.ts';
 export interface EncodeOptions {
   /** Write strings without quotes when they are bare words. Default: true. */
   bareStrings?: boolean;
+  /**
+   * Keys present in fewer than this share of the objects at a position leave the
+   * positional fields and are written by name in the record's `*` slot. Models read
+   * sparse data with far less effort this way. Default: 0.5. Set 0 to keep every
+   * key positional.
+   */
+  keyedBelow?: number;
 }
 
 type Obj = { [key: string]: Json };
@@ -11,6 +18,8 @@ type Obj = { [key: string]: Json };
 const BARE_WORD = /^[\p{L}_][^\s[\]{}"\\,~\p{Cc}]*$/u;
 /** Below this share of filled slots, a position is written as JSON instead of records. */
 const MIN_FILL = 0.3;
+/** Keys in fewer than half of the objects go to the `*` slot by default. */
+const DEFAULT_KEYED_BELOW = 0.5;
 
 /** Encodes any JSON-serializable value as an LWON document. */
 export function encode(value: unknown, options: EncodeOptions = {}): string {
@@ -19,7 +28,7 @@ export function encode(value: unknown, options: EncodeOptions = {}): string {
   const data = JSON.parse(text) as Json;
   const w = new Writer(options.bareStrings ?? true);
 
-  const header = inferHeader(data);
+  const header = inferHeader(data, options.keyedBelow ?? DEFAULT_KEYED_BELOW);
   const head = writeHeader(header);
   if (header.root === 'any') return `${head}\n${w.any(data)}`;
   if (header.root === 'object') return `${head}\n${w.record(data as Obj, header.shape, true)}`;
@@ -29,7 +38,11 @@ export function encode(value: unknown, options: EncodeOptions = {}): string {
 
 // --- Inference -------------------------------------------------------------
 
-export function inferHeader(data: Json): Header {
+/** Share below which a key is written by name; set for the duration of one inference. */
+let keyedBelow = 0;
+
+export function inferHeader(data: Json, keyed = DEFAULT_KEYED_BELOW): Header {
+  keyedBelow = keyed;
   if (Array.isArray(data) && data.some(isObj) && !data.some(Array.isArray)) {
     const objs = data.filter(isObj);
     const keys = unionKeys(objs);
@@ -68,8 +81,17 @@ function inferShape(
   objs: Obj[], name: string, stack: Shape[], path: string,
   blocked: Set<string>, pending: PendingRef[],
 ): Shape {
-  const keys = unionKeys(objs);
-  const shape: Shape = { name, keys, fields: [] };
+  let keys = unionKeys(objs);
+  let rest = false;
+  if (keyedBelow > 0 && objs.length > 1) {
+    const share = (k: string) => objs.filter((o) => Object.hasOwn(o, k)).length / objs.length;
+    const positional = keys.filter((k) => share(k) >= keyedBelow);
+    if (positional.length > 0 && positional.length < keys.length) {
+      keys = positional;
+      rest = true;
+    }
+  }
+  const shape: Shape = { name, keys, fields: [], ...(rest && { rest }) };
   const inner = [...stack, shape];
   for (const key of keys) {
     const values: Json[] = [];
@@ -144,7 +166,7 @@ function fitsRecord(o: Obj, shape: Shape): boolean {
 /** Whether an object is written as a record of this shape (otherwise as embedded JSON). */
 function asRecord(o: Obj, shape: Shape): boolean {
   const keys = Object.keys(o);
-  return keys.length > 0 && keys.every((k) => shape.keys.includes(k));
+  return keys.length > 0 && (shape.rest || keys.every((k) => shape.keys.includes(k)));
 }
 
 function unionKeys(objs: Obj[]): string[] {
@@ -195,6 +217,10 @@ class Writer {
 
   record(o: Obj, shape: Shape, lines = false): string {
     const parts = shape.fields.map((f) => (Object.hasOwn(o, f.key) ? this.value(o[f.key], f.kind, f.shape, lines) : '~'));
+    if (shape.rest) {
+      const extra = Object.keys(o).filter((k) => !shape.keys.includes(k));
+      parts.push(extra.length ? JSON.stringify(Object.fromEntries(extra.map((k) => [k, o[k]]))) : '~');
+    }
     while (parts.at(-1) === '~') parts.pop();
     return `[${parts.join(' ')}]`;
   }

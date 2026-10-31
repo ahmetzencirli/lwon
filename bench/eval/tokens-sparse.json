@@ -1,4 +1,28 @@
 {
+  "claude-haiku-5-5": {
+    "sparse": {
+      "json": {
+        "raw": 10922,
+        "prompt": 10939
+      },
+      "toon": {
+        "raw": 11433,
+        "prompt": 11464
+      },
+      "lwon": {
+        "raw": 8835,
+        "prompt": 9163
+      },
+      "lwon-positional": {
+        "raw": 7167,
+        "prompt": 7475
+      },
+      "lwon-p2": {
+        "raw": 7167,
+        "prompt": 7495
+      }
+    }
+  },
   "claude-sonnet-5-5": {
     "sparse": {
       "json": {
@@ -10,8 +34,40 @@
         "prompt": 11464
       },
       "lwon": {
+        "raw": 8835,
+        "prompt": 9163
+      },
+      "lwon-positional": {
         "raw": 7167,
         "prompt": 7475
+      },
+      "lwon-p2": {
+        "raw": 7167,
+        "prompt": 7495
+      }
+    }
+  },
+  "claude-opus-5-5": {
+    "sparse": {
+      "json": {
+        "raw": 10922,
+        "prompt": 10939
+      },
+      "toon": {
+        "raw": 11433,
+        "prompt": 11464
+      },
+      "lwon": {
+        "raw": 8835,
+        "prompt": 9163
+      },
+      "lwon-positional": {
+        "raw": 7167,
+        "prompt": 7475
+      },
+      "lwon-p2": {
+        "raw": 7167,
+        "prompt": 7495
       }
     }
   }

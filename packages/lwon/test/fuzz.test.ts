@@ -87,6 +87,8 @@ test('fuzz: decode(encode(x)) equals x', () => {
     try {
       text = encode(x);
       assert.deepEqual(canonical(decode(text)), canonical(x));
+      text = encode(x, { keyedBelow: 0 });
+      assert.deepEqual(canonical(decode(text)), canonical(x));
     } catch (e) {
       assert.fail(`seed ${seed}\ninput: ${JSON.stringify(x)}\nlwon:\n${text}\n${(e as Error).message}`);
     }

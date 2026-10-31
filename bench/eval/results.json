@@ -73,6 +73,39 @@
         "correct": 44,
         "total": 44,
         "errors": 0,
+        "cost": 0.008686445000000001,
+        "missed": [],
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon-positional": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
         "cost": 0.008697125,
         "missed": [],
         "byKind": {
@@ -171,6 +204,39 @@
         }
       },
       "lwon": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
+        "cost": 0.007966945,
+        "missed": [],
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon-positional": {
         "correct": 43,
         "total": 44,
         "errors": 0,
@@ -277,6 +343,39 @@
         "correct": 44,
         "total": 44,
         "errors": 0,
+        "cost": 0.214586,
+        "missed": [],
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon-positional": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
         "cost": 0.23216800000000004,
         "missed": [],
         "byKind": {
@@ -378,6 +477,39 @@
         "correct": 44,
         "total": 44,
         "errors": 0,
+        "cost": 0.12842889999999993,
+        "missed": [],
+        "byKind": {
+          "lookup": [
+            11,
+            11
+          ],
+          "count": [
+            12,
+            12
+          ],
+          "aggregate": [
+            4,
+            4
+          ],
+          "nested": [
+            9,
+            9
+          ],
+          "absent": [
+            4,
+            4
+          ],
+          "tree": [
+            4,
+            4
+          ]
+        }
+      },
+      "lwon-positional": {
+        "correct": 44,
+        "total": 44,
+        "errors": 0,
         "cost": 0.1178325,
         "missed": [],
         "byKind": {
@@ -422,6 +554,11 @@
         "cached": 0.00012280227272727274
       },
       "lwon": {
+        "output": 186.3181818181818,
+        "once": 0.00040856818181818187,
+        "cached": 0.0001247
+      },
+      "lwon-positional": {
         "output": 235.02272727272728,
         "once": 0.0004272613636363636,
         "cached": 0.00014848636363636364
@@ -439,6 +576,11 @@
         "cached": 0.00011726818181818181
       },
       "lwon": {
+        "output": 153.61363636363637,
+        "once": 0.0003922159090909091,
+        "cached": 0.00010834772727272727
+      },
+      "lwon-positional": {
         "output": 209.52272727272728,
         "once": 0.00041451136363636364,
         "cached": 0.00013573636363636366
@@ -456,6 +598,11 @@
         "cached": 0.002376272727272727
       },
       "lwon": {
+        "output": 107.72727272727273,
+        "once": 0.01477090909090909,
+        "cached": 0.0027853636363636366
+      },
+      "lwon-positional": {
         "output": 130.1818181818182,
         "once": 0.014993636363636363,
         "cached": 0.003223136363636364
@@ -473,6 +620,11 @@
         "cached": 0.001528090909090909
       },
       "lwon": {
+        "output": 83.36363636363636,
+        "once": 0.007141818181818182,
+        "cached": 0.0014644545454545455
+      },
+      "lwon-positional": {
         "output": 107.5,
         "once": 0.00727,
         "cached": 0.0016945
@@ -492,7 +644,15 @@
         },
         "lwon": {
           "raw": 2503,
+          "prompt": 2831
+        },
+        "lwon-positional": {
+          "raw": 2503,
           "prompt": 2811
+        },
+        "lwon-p2": {
+          "raw": 2503,
+          "prompt": 2831
         }
       },
       "orders": {
@@ -506,7 +666,15 @@
         },
         "lwon": {
           "raw": 4808,
+          "prompt": 5136
+        },
+        "lwon-positional": {
+          "raw": 4808,
           "prompt": 5116
+        },
+        "lwon-p2": {
+          "raw": 4808,
+          "prompt": 5136
         }
       },
       "issues": {
@@ -520,7 +688,15 @@
         },
         "lwon": {
           "raw": 2760,
+          "prompt": 3088
+        },
+        "lwon-positional": {
+          "raw": 2760,
           "prompt": 3068
+        },
+        "lwon-p2": {
+          "raw": 2760,
+          "prompt": 3088
         }
       },
       "menu": {
@@ -534,7 +710,15 @@
         },
         "lwon": {
           "raw": 362,
+          "prompt": 690
+        },
+        "lwon-positional": {
+          "raw": 362,
           "prompt": 670
+        },
+        "lwon-p2": {
+          "raw": 362,
+          "prompt": 690
         }
       },
       "logs": {
@@ -547,8 +731,16 @@
           "prompt": 4503
         },
         "lwon": {
+          "raw": 3452,
+          "prompt": 3780
+        },
+        "lwon-positional": {
           "raw": 3222,
           "prompt": 3530
+        },
+        "lwon-p2": {
+          "raw": 3222,
+          "prompt": 3550
         }
       },
       "search": {
@@ -562,7 +754,15 @@
         },
         "lwon": {
           "raw": 2298,
+          "prompt": 2626
+        },
+        "lwon-positional": {
+          "raw": 2298,
           "prompt": 2606
+        },
+        "lwon-p2": {
+          "raw": 2298,
+          "prompt": 2626
         }
       }
     },
@@ -578,7 +778,15 @@
         },
         "lwon": {
           "raw": 2503,
+          "prompt": 2831
+        },
+        "lwon-positional": {
+          "raw": 2503,
           "prompt": 2811
+        },
+        "lwon-p2": {
+          "raw": 2503,
+          "prompt": 2831
         }
       },
       "orders": {
@@ -592,7 +800,15 @@
         },
         "lwon": {
           "raw": 4808,
+          "prompt": 5136
+        },
+        "lwon-positional": {
+          "raw": 4808,
           "prompt": 5116
+        },
+        "lwon-p2": {
+          "raw": 4808,
+          "prompt": 5136
         }
       },
       "issues": {
@@ -606,7 +822,15 @@
         },
         "lwon": {
           "raw": 2760,
+          "prompt": 3088
+        },
+        "lwon-positional": {
+          "raw": 2760,
           "prompt": 3068
+        },
+        "lwon-p2": {
+          "raw": 2760,
+          "prompt": 3088
         }
       },
       "menu": {
@@ -620,7 +844,15 @@
         },
         "lwon": {
           "raw": 362,
+          "prompt": 690
+        },
+        "lwon-positional": {
+          "raw": 362,
           "prompt": 670
+        },
+        "lwon-p2": {
+          "raw": 362,
+          "prompt": 690
         }
       },
       "logs": {
@@ -633,8 +865,16 @@
           "prompt": 4503
         },
         "lwon": {
+          "raw": 3452,
+          "prompt": 3780
+        },
+        "lwon-positional": {
           "raw": 3222,
           "prompt": 3530
+        },
+        "lwon-p2": {
+          "raw": 3222,
+          "prompt": 3550
         }
       },
       "search": {
@@ -648,7 +888,15 @@
         },
         "lwon": {
           "raw": 2298,
+          "prompt": 2626
+        },
+        "lwon-positional": {
+          "raw": 2298,
           "prompt": 2606
+        },
+        "lwon-p2": {
+          "raw": 2298,
+          "prompt": 2626
         }
       }
     },
@@ -664,7 +912,15 @@
         },
         "lwon": {
           "raw": 2503,
+          "prompt": 2831
+        },
+        "lwon-positional": {
+          "raw": 2503,
           "prompt": 2811
+        },
+        "lwon-p2": {
+          "raw": 2503,
+          "prompt": 2831
         }
       },
       "orders": {
@@ -678,7 +934,15 @@
         },
         "lwon": {
           "raw": 4808,
+          "prompt": 5136
+        },
+        "lwon-positional": {
+          "raw": 4808,
           "prompt": 5116
+        },
+        "lwon-p2": {
+          "raw": 4808,
+          "prompt": 5136
         }
       },
       "issues": {
@@ -692,7 +956,15 @@
         },
         "lwon": {
           "raw": 2760,
+          "prompt": 3088
+        },
+        "lwon-positional": {
+          "raw": 2760,
           "prompt": 3068
+        },
+        "lwon-p2": {
+          "raw": 2760,
+          "prompt": 3088
         }
       },
       "menu": {
@@ -706,7 +978,15 @@
         },
         "lwon": {
           "raw": 362,
+          "prompt": 690
+        },
+        "lwon-positional": {
+          "raw": 362,
           "prompt": 670
+        },
+        "lwon-p2": {
+          "raw": 362,
+          "prompt": 690
         }
       },
       "logs": {
@@ -719,8 +999,16 @@
           "prompt": 4503
         },
         "lwon": {
+          "raw": 3452,
+          "prompt": 3780
+        },
+        "lwon-positional": {
           "raw": 3222,
           "prompt": 3530
+        },
+        "lwon-p2": {
+          "raw": 3222,
+          "prompt": 3550
         }
       },
       "search": {
@@ -734,7 +1022,15 @@
         },
         "lwon": {
           "raw": 2298,
+          "prompt": 2626
+        },
+        "lwon-positional": {
+          "raw": 2298,
           "prompt": 2606
+        },
+        "lwon-p2": {
+          "raw": 2298,
+          "prompt": 2626
         }
       }
     }
