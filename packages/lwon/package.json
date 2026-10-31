@@ -1,6 +1,6 @@
 {
   "name": "@lwon/core",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Lightweight Object Notation: JSON with the keys written once. Lossless, two-way, built to save LLM tokens.",
   "keywords": [
     "json",

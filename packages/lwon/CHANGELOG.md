@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0-beta.2
+
+- First release built and staged from GitHub Actions through npm trusted
+  publishing, with provenance. No changes to the library.
+
 ## 1.0.0-beta.1
 
 First published release of the LWON 1.0 reference library, as `@lwon/core` on npm.
