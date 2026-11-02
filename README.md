@@ -78,7 +78,7 @@ npx @lwon/core primer             # the prompt explanation
 
 ## With language models
 
-Models do not know LWON yet, so send the [primer](ai/lwon-primer.md) (about 220
+Models do not know LWON yet, so send the [primer](ai/lwon-primer.md) (about 330
 tokens) once alongside the data. It pays off as soon as the data is a few
 hundred tokens long. Convert data **before** it reaches the model, in your
 tool or API layer; asking the model to convert saves nothing.
